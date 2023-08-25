@@ -8,24 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		7527FDC9270BEEA800710086 /* TCCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 7527FDC7270BEEA800710086 /* TCCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7527FDE0270C095700710086 /* FGCGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7527FDCD270C095500710086 /* FGCGraph.cpp */; };
-		7527FDE1270C095700710086 /* FGMM.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7527FDCE270C095500710086 /* FGMM.cpp */; };
 		7527FDE2270C095700710086 /* PaintSelect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7527FDCF270C095500710086 /* PaintSelect.cpp */; };
-		7527FDE3270C095700710086 /* FGCGraph.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7527FDD0270C095600710086 /* FGCGraph.hpp */; };
-		7527FDE4270C095700710086 /* GuidedFilter.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7527FDD1270C095600710086 /* GuidedFilter.hpp */; };
 		7527FDE5270C095700710086 /* PaintSelect.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7527FDD2270C095600710086 /* PaintSelect.hpp */; };
-		7527FDE6270C095700710086 /* QuickGraphCut.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7527FDD3270C095600710086 /* QuickGraphCut.cpp */; };
-		7527FDE7270C095700710086 /* GlobalMatting.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7527FDD4270C095600710086 /* GlobalMatting.cpp */; };
-		7527FDE8270C095700710086 /* FGMM.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7527FDD5270C095600710086 /* FGMM.hpp */; };
 		7527FDE9270C095700710086 /* KCenterClustering.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7527FDD6270C095600710086 /* KCenterClustering.hpp */; };
 		7527FDEA270C095700710086 /* improc.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7527FDD7270C095600710086 /* improc.hpp */; };
-		7527FDEB270C095700710086 /* GuidedFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7527FDD8270C095600710086 /* GuidedFilter.cpp */; };
 		7527FDEC270C095700710086 /* improc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7527FDD9270C095600710086 /* improc.cpp */; };
 		7527FDED270C095700710086 /* precomp.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7527FDDA270C095700710086 /* precomp.hpp */; };
 		7527FDEE270C095700710086 /* TCCoreLibs0.h in Headers */ = {isa = PBXBuildFile; fileRef = 7527FDDB270C095700710086 /* TCCoreLibs0.h */; };
 		7527FDEF270C095700710086 /* TCCoreLibs.h in Headers */ = {isa = PBXBuildFile; fileRef = 7527FDDC270C095700710086 /* TCCoreLibs.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7527FDF0270C095700710086 /* QuickGraphCut.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7527FDDD270C095700710086 /* QuickGraphCut.hpp */; };
-		7527FDF1270C095700710086 /* GlobalMatting.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7527FDDE270C095700710086 /* GlobalMatting.hpp */; };
 		7527FDF2270C095700710086 /* KCenterClustering.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7527FDDF270C095700710086 /* KCenterClustering.cpp */; };
 		7527FDF5270C09FE00710086 /* TCCoreWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7527FDF3270C09FE00710086 /* TCCoreWrapper.mm */; };
 		7527FDF6270C09FE00710086 /* TCCoreWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 7527FDF4270C09FE00710086 /* TCCoreWrapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -81,24 +71,14 @@
 		7527FDC5270BEEA700710086 /* TCCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TCCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7527FDC7270BEEA800710086 /* TCCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TCCore.h; sourceTree = "<group>"; };
 		7527FDC8270BEEA800710086 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7527FDCD270C095500710086 /* FGCGraph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FGCGraph.cpp; sourceTree = "<group>"; };
-		7527FDCE270C095500710086 /* FGMM.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FGMM.cpp; sourceTree = "<group>"; };
 		7527FDCF270C095500710086 /* PaintSelect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PaintSelect.cpp; sourceTree = "<group>"; };
-		7527FDD0270C095600710086 /* FGCGraph.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FGCGraph.hpp; sourceTree = "<group>"; };
-		7527FDD1270C095600710086 /* GuidedFilter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GuidedFilter.hpp; sourceTree = "<group>"; };
 		7527FDD2270C095600710086 /* PaintSelect.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PaintSelect.hpp; sourceTree = "<group>"; };
-		7527FDD3270C095600710086 /* QuickGraphCut.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = QuickGraphCut.cpp; sourceTree = "<group>"; };
-		7527FDD4270C095600710086 /* GlobalMatting.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GlobalMatting.cpp; sourceTree = "<group>"; };
-		7527FDD5270C095600710086 /* FGMM.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FGMM.hpp; sourceTree = "<group>"; };
 		7527FDD6270C095600710086 /* KCenterClustering.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = KCenterClustering.hpp; sourceTree = "<group>"; };
 		7527FDD7270C095600710086 /* improc.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = improc.hpp; sourceTree = "<group>"; };
-		7527FDD8270C095600710086 /* GuidedFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GuidedFilter.cpp; sourceTree = "<group>"; };
 		7527FDD9270C095600710086 /* improc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = improc.cpp; sourceTree = "<group>"; };
 		7527FDDA270C095700710086 /* precomp.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = precomp.hpp; sourceTree = "<group>"; };
 		7527FDDB270C095700710086 /* TCCoreLibs0.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCCoreLibs0.h; sourceTree = "<group>"; };
 		7527FDDC270C095700710086 /* TCCoreLibs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCCoreLibs.h; sourceTree = "<group>"; };
-		7527FDDD270C095700710086 /* QuickGraphCut.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = QuickGraphCut.hpp; sourceTree = "<group>"; };
-		7527FDDE270C095700710086 /* GlobalMatting.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GlobalMatting.hpp; sourceTree = "<group>"; };
 		7527FDDF270C095700710086 /* KCenterClustering.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = KCenterClustering.cpp; sourceTree = "<group>"; };
 		7527FDF3270C09FE00710086 /* TCCoreWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TCCoreWrapper.mm; sourceTree = "<group>"; };
 		7527FDF4270C09FE00710086 /* TCCoreWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCCoreWrapper.h; sourceTree = "<group>"; };
@@ -218,28 +198,18 @@
 		7527FDC6270BEEA700710086 /* TCCore */ = {
 			isa = PBXGroup;
 			children = (
-				7527FDCD270C095500710086 /* FGCGraph.cpp */,
-				7527FDCE270C095500710086 /* FGMM.cpp */,
-				7527FDD4270C095600710086 /* GlobalMatting.cpp */,
-				7527FDD8270C095600710086 /* GuidedFilter.cpp */,
 				7527FDD9270C095600710086 /* improc.cpp */,
 				7527FDDF270C095700710086 /* KCenterClustering.cpp */,
 				7527FDCF270C095500710086 /* PaintSelect.cpp */,
-				7527FDD3270C095600710086 /* QuickGraphCut.cpp */,
 				7527FDF7270C0BCD00710086 /* opencv2.framework */,
 				7527FDC7270BEEA800710086 /* TCCore.h */,
 				7527FDDC270C095700710086 /* TCCoreLibs.h */,
 				7527FDDB270C095700710086 /* TCCoreLibs0.h */,
 				7527FDF4270C09FE00710086 /* TCCoreWrapper.h */,
-				7527FDD0270C095600710086 /* FGCGraph.hpp */,
-				7527FDD5270C095600710086 /* FGMM.hpp */,
-				7527FDDE270C095700710086 /* GlobalMatting.hpp */,
-				7527FDD1270C095600710086 /* GuidedFilter.hpp */,
 				7527FDD7270C095600710086 /* improc.hpp */,
 				7527FDD6270C095600710086 /* KCenterClustering.hpp */,
 				7527FDD2270C095600710086 /* PaintSelect.hpp */,
 				7527FDDA270C095700710086 /* precomp.hpp */,
-				7527FDDD270C095700710086 /* QuickGraphCut.hpp */,
 				7527FDF3270C09FE00710086 /* TCCoreWrapper.mm */,
 				7527FDC8270BEEA800710086 /* Info.plist */,
 			);
@@ -287,16 +257,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				7527FDEA270C095700710086 /* improc.hpp in Headers */,
-				7527FDF0270C095700710086 /* QuickGraphCut.hpp in Headers */,
-				7527FDE3270C095700710086 /* FGCGraph.hpp in Headers */,
 				7527FDEE270C095700710086 /* TCCoreLibs0.h in Headers */,
 				7527FDE5270C095700710086 /* PaintSelect.hpp in Headers */,
 				7527FDC9270BEEA800710086 /* TCCore.h in Headers */,
 				7527FDEF270C095700710086 /* TCCoreLibs.h in Headers */,
-				7527FDE4270C095700710086 /* GuidedFilter.hpp in Headers */,
-				7527FDF1270C095700710086 /* GlobalMatting.hpp in Headers */,
 				7527FDF6270C09FE00710086 /* TCCoreWrapper.h in Headers */,
-				7527FDE8270C095700710086 /* FGMM.hpp in Headers */,
 				7527FDE9270C095700710086 /* KCenterClustering.hpp in Headers */,
 				7527FDED270C095700710086 /* precomp.hpp in Headers */,
 			);
@@ -437,13 +402,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7527FDE2270C095700710086 /* PaintSelect.cpp in Sources */,
-				7527FDEB270C095700710086 /* GuidedFilter.cpp in Sources */,
 				7527FDF2270C095700710086 /* KCenterClustering.cpp in Sources */,
-				7527FDE6270C095700710086 /* QuickGraphCut.cpp in Sources */,
 				7527FDEC270C095700710086 /* improc.cpp in Sources */,
-				7527FDE1270C095700710086 /* FGMM.cpp in Sources */,
-				7527FDE7270C095700710086 /* GlobalMatting.cpp in Sources */,
-				7527FDE0270C095700710086 /* FGCGraph.cpp in Sources */,
 				7527FDF5270C09FE00710086 /* TCCoreWrapper.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

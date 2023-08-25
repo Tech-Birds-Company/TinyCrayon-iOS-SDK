@@ -201,48 +201,6 @@ void improcPopMaskLog(uchar *mask, const unsigned short *log, int count, int off
 //
 void improcUpdateMask(uchar *mask, const uchar *alpha, const uchar *region, int count);
 
-//
-//   NAME: improcImageMatting
-//
-//   PARAMETERS:
-//        imageData        (IN) - image data
-//        size             (IN) - size of original image
-//        alpha           (OUT) - output alpha
-//        region           (IN) - data of region (user's drawing)
-//        rect             (IN) - rect where to execute image matting
-//
-//   DESCRIPTION:
-//        Image matting
-//
-//   RETURNS:
-//        Nothing
-//
-//   NOTES:
-//        None
-//
-bool improcImageMatting(const uchar *imageData, cv::Size size, uchar *alpha, const uchar *region, cv::Rect rect);
-
-//
-//   NAME: improcImageFiltering
-//
-//   PARAMETERS:
-//        imageData        (IN) - image data
-//        size             (IN) - size of original image
-//        alpha           (OUT) - output alpha
-//        region           (IN) - data of region (user's drawing)
-//        rect             (IN) - rect where to execute image matting
-//        add              (IN) - add or subtract
-//
-//   DESCRIPTION:
-//        image guided filtering
-//
-//   RETURNS:
-//        true if image filter successfully executed, false otherwise
-//
-//   NOTES:
-//        None
-//
-bool improcImageFiltering(const uchar *imageData, cv::Size size, uchar *alpha, const uchar *region, cv::Rect rect, bool add);
 
 void improcInvertAlpha(uchar *alpha, int count);
 

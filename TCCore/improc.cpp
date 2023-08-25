@@ -11,8 +11,6 @@
 #include "improc.hpp"
 #include "TCCoreLibs0.h"
 #include "PaintSelect.hpp"
-#include "GlobalMatting.hpp"
-#include "GuidedFilter.hpp"
 
 #define SMOOTH_RADIUS    3
 #define SMOOTH_SOFTNESS 27
@@ -348,101 +346,6 @@ void improcUpdateMask(uchar *mask, const uchar *alpha, const uchar *region, int 
             bis(mask[i], GC_FLAG_ALPHA);
         }
     }
-}
-
-bool improcImageMatting(const uchar *imageData, cv::Size size, uchar *alpha, const uchar *region, cv::Rect rect) {
-    cv::Mat img = cv::Mat(size, CV_8UC4, (uchar *)imageData);
-    cv::Mat regionMat = cv::Mat(size, CV_8UC1, (uchar *)region);
-    cv::Mat alphaMat = cv::Mat(size, CV_8UC1, alpha);
-    cv::Mat output = cv::Mat(rect.size(), CV_8UC1);
-    cv::Mat trimap = cv::Mat(size, CV_8UC1);
-    cv::Point p;
-    
-    if (rect.width == 0 || rect.height == 0)
-        return false;
-    
-    for (p.y = 0; p.y < rect.height; p.y++) {
-        for (p.x = 0; p.x < rect.width; p.x++) {
-            cv::Point q = cv::Point(p.x + rect.x, p.y + rect.y);
-            
-            output.at<uchar>(p) = alphaMat.at<uchar>(q);
-            
-            if (regionMat.at<uchar>(q) == GM_UNKNOWN) {
-                trimap.at<uchar>(q) = GM_UNKNOWN;
-            }
-            else if (alphaMat.at<uchar>(q) == 0) {
-                trimap.at<uchar>(q) = GM_BGD;
-            }
-            else if (alphaMat.at<uchar>(q) == 255) {
-                trimap.at<uchar>(q) = GM_FGD;
-            }
-            else {
-                trimap.at<uchar>(q) = GM_PASS_THROUGH;
-            }
-        }
-    }
-    
-    globalMatting(img, trimap, output, rect);
-    
-    int r = MATTING_RADIUS; // try r=2, 4, or 8
-    double eps = 1e-6;; // try eps=0.1^2, 0.2^2, 0.4^2
-    
-    eps *= 255 * 255;   // Because the intensity range of our images is [0, 255]
-    output = guidedFilter(img(rect), output, r, eps, cv::Rect(0, 0, rect.width, rect.height));
-    
-    for (p.y = 0; p.y < rect.height; p.y++) {
-        for (p.x = 0; p.x < rect.width; p.x++) {
-            cv::Point q = cv::Point(p.x + rect.x, p.y + rect.y);
-            if (regionMat.at<uchar>(q) != GM_UNINIT)
-                alphaMat.at<uchar>(q) = output.at<uchar>(p);
-        }
-    }
-    
-    return true;
-}
-
-bool improcImageFiltering(const uchar *imageData, cv::Size size, uchar *alpha, const uchar *region, cv::Rect rect, bool add) {
-    cv::Mat img = cv::Mat(size, CV_8UC4, (uchar *)imageData);
-    cv::Mat regionMat = cv::Mat(size, CV_8UC1, (uchar *)region);
-    cv::Mat alphaMat = cv::Mat(size, CV_8UC1, alpha);
-    cv::Point p;
-    
-    if (rect.width <= 0 || rect.height <= 0)
-        return false;
-    
-    for (p.y = 0; p.y < rect.height; p.y++) {
-        for (p.x = 0; p.x < rect.width; p.x++) {
-            cv::Point q = cv::Point(p.x + rect.x, p.y + rect.y);
-            if (regionMat.at<uchar>(q) == GM_FGD && alphaMat.at<uchar>(q) < 255)
-                alphaMat.at<uchar>(q)++;
-            else if (regionMat.at<uchar>(q) == GM_BGD && alphaMat.at<uchar>(q) > 0)
-                alphaMat.at<uchar>(q)--;
-        }
-    }
-    
-    int r = MATTING_RADIUS; // try r=2, 4, or 8
-    double eps = 1e-6;; // try eps=0.1^2, 0.2^2, 0.4^2
-    
-    eps *= 255 * 255;   // Because the intensity range of our images is [0, 255]
-    
-    Mat output = guidedFilter(img, alphaMat, r, eps, rect);
-    
-    for (p.y = 0; p.y < rect.height; p.y++) {
-        for (p.x = 0; p.x < rect.width; p.x++) {
-            cv::Point q = cv::Point(p.x + rect.x, p.y + rect.y);
-            
-            if (regionMat.at<uchar>(q) == GM_UNINIT ||
-                (add && output.at<uchar>(p) <= alphaMat.at<uchar>(q)) ||
-                (!add && output.at<uchar>(p) >= alphaMat.at<uchar>(q))) {
-                continue;
-            }
-            else {
-                alphaMat.at<uchar>(q) = output.at<uchar>(p);
-            }
-        }
-    }
-    
-    return true;
 }
 
 void improcInvertAlpha(uchar *alpha, int count) {

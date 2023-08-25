@@ -7,8 +7,6 @@
 //
 
 #include "PaintSelect.hpp"
-#include "QuickGraphCut.hpp"
-#include "GlobalMatting.hpp"
 
 void cleanupSelect(const Mat &mask, const Mat &region, Mat &result, int mode) {
     const int cols = result.cols;
@@ -174,14 +172,6 @@ bool graphCutSelect(const Mat &img, const Mat &mask, const Mat &region, Mat &res
         }
     }
     
-    // GrabCut segmentation
-    if (!quickGraphCut(img,         // input image
-                       result,      // segmentation result
-                       iterCount))  // number of iterations
-    {
-        return false;
-    }
-    
     return true;
 }
 
@@ -256,10 +246,6 @@ void paintSelectHelper(const Mat &img, const Mat &mask, const Mat &region, Mat &
     
     resize(boundary, boundary, result.size(), 0, 0, INTER_NEAREST);
     resize(resizedResult, result, result.size(), 0, 0, INTER_NEAREST);
-    
-    quickGraphCut(img,  // input image
-                  boundary, // segmentation result
-                  iterCount);  // number of iterations
     
     for (p.y = 0; p.y < boundary.rows; p.y++) {
         for (p.x = 0; p.x < boundary.cols; p.x++) {

@@ -13,8 +13,7 @@
 
 #include "TCCoreLibs0.h"
 #include "improc.hpp"
-#include "GlobalMatting.hpp"
-#include "GuidedFilter.hpp"
+
 
 @implementation TCCore
 
@@ -245,18 +244,6 @@
     *outRect = CGRectMake(cvOutRect.x, cvOutRect.y, cvOutRect.width, cvOutRect.height);
     
     return retval;
-}
-
-+(Boolean) imageMatting:(const uchar *)imageData size:(CGSize)size alpha:(uchar *)alpha region:(const uchar *)region rect:(CGRect)rect{
-    cv::Rect cvRect = cv::Rect(rect.origin.x, rect.origin.y, rect.size.width, rect.size.height);
-    cv::Size cvSize = cv::Size(size.width, size.height);
-    return improcImageMatting(imageData, cvSize, alpha, region, cvRect);
-}
-
-+(Boolean) imageFiltering:(const uchar *)imageData size:(CGSize)size alpha:(uchar *)alpha region:(const uchar *)region rect:(CGRect)rect add:(Boolean)add {
-    cv::Rect cvRect = cv::Rect(rect.origin.x, rect.origin.y, rect.size.width, rect.size.height);
-    cv::Size cvSize = cv::Size(size.width, size.height);
-    return improcImageFiltering(imageData, cvSize, alpha, region, cvRect, add);
 }
 
 +(void) invertAlpha:(uchar *)alpha count:(NSInteger)count {

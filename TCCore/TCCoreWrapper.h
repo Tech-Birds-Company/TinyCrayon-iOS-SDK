@@ -50,10 +50,6 @@ typedef unsigned short ushort;
 
 +(Boolean) drawRadialGradientOnAlpha:(uchar *)alpha size:(CGSize)size center:(CGPoint)center startValue:(uchar)startValue startRadius:(CGFloat)startRadius endValue:(uchar)endValue endRadius:(CGFloat)endRadius outRect:(CGRect *)outRect add:(Boolean)add;
 
-+(Boolean) imageMatting:(const uchar *)imageData size:(CGSize)size alpha:(uchar *)alpha region:(const uchar *)region rect:(CGRect)rect;
-
-+(Boolean) imageFiltering:(const uchar *)imageData size:(CGSize)size alpha:(uchar *)alpha region:(const uchar *)region rect:(CGRect)rect add:(Boolean)add;
-
 +(void) invertAlpha:(uchar *)alpha count:(NSInteger)count;
 
 +(void) invertMask:(uchar *)mask count:(NSInteger)count;
