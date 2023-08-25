@@ -59,50 +59,6 @@ class ToolManager {
         return encoded
     }
     
-    func pushLogOfQuickSelect(previousMask: [UInt8], currentMask: [UInt8]) {
-        var log: QuickSelectLog
-        let diff = encodeDiff(from: previousMask, to: currentMask)
-        
-        // If diff have no change at all, just return
-        if (!ToolManager.diffContainsChange(diff: diff)) {
-            return
-        }
-        
-        self.compactLog()
-
-        if (logIdx >= 0 && logs[logIdx].type == .quickSelect) {
-            log = logs[logIdx] as! QuickSelectLog
-        }
-        else {
-            log = QuickSelectLog()
-            appendLog(log: log)
-        }
-        
-        log.push(diff: diff)
-    }
-    
-    func pushLogOfHairBrush(previousAlpha: [UInt8], currentAlpha: [UInt8]) {
-        var log: HairBrushLog
-        let diff = encodeDiff(from: previousAlpha, to: currentAlpha)
-        
-        // If diff have no change at all, just return
-        if (!ToolManager.diffContainsChange(diff: diff)) {
-            return
-        }
-        
-        self.compactLog()
-        
-        if (logIdx >= 0 && logs[logIdx].type == .hairBrush) {
-            log = logs[logIdx] as! HairBrushLog
-        }
-        else {
-            log = HairBrushLog()
-            appendLog(log: log)
-        }
-        
-        log.push(diff: diff)
-    }
-    
     func pushLogOfBrush(previousAlpha: [UInt8], currentAlpha: [UInt8]) {
         var log: BrushLog
         let diff = encodeDiff(from: previousAlpha, to: currentAlpha)
@@ -160,13 +116,6 @@ class ToolManager {
 
         // Save the state of current tool to log
         switch tool.type {
-        case .quickSelect:
-            let qstool = tool as! QuickSelectTool
-            let log = logs[logIdx] as! QuickSelectLog
-            log.encodedMask = encodeArray(array: qstool.mask)
-            log.encodedAlpha = encodeArray(array: maskView.opacity)
-        case .hairBrush:
-            break
         case .brush:
             break
         }
@@ -242,28 +191,6 @@ class ToolManager {
         self.endProcessing()
         
         switch type {
-        case .quickSelect:
-            let qstool = QuickSelectTool(maskView: maskView, toolManager: self)
-
-            if (logIdx >= 0 && logs[logIdx] is QuickSelectLog && logs[logIdx].idx >= 0) {
-                let log = logs[logIdx] as! QuickSelectLog
-                
-                if (log.encodedMask == nil) {
-                    // nothing to do
-                }
-                
-                TCCore.logDecodeArray(&qstool.mask, encoded: log.encodedMask, decodedCount: qstool.mask.count, encodedCount: log.encodedMask.count)
-                TCCore.logDecodeArray(&maskView.opacity, encoded: log.encodedAlpha, decodedCount: maskView.opacity.count, encodedCount: log.encodedAlpha.count)
-                TCCore.arrayCopy(&qstool.previousMask, src: qstool.mask, count: qstool.mask.count)
-                log.encodedAlpha = nil
-                log.encodedMask = nil
-            }
-            qstool.refresh()
-            tool = qstool
-
-        case .hairBrush:
-            tool = HairBrushTool(maskView: maskView, toolManager: self)
-            
         case .brush:
             tool = BrushTool(maskView: maskView, toolManager: self)
         }
@@ -277,20 +204,14 @@ class ToolManager {
         }
         
         switch tool.type {
-        case .brush, .hairBrush:
+        case .brush:
             return false
-        case .quickSelect:
-            return (tool as! QuickSelectTool).isSelectRunning
         }
     }
     
     // Create tool log based on type
     static func createLog(type: TCMaskTool) -> ToolLog {
         switch type {
-        case .quickSelect:
-            return QuickSelectLog()
-        case .hairBrush:
-            return HairBrushLog()
         case .brush:
             return BrushLog()
         }

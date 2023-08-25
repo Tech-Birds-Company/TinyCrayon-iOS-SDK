@@ -12,8 +12,4 @@ import Foundation
 @objc public enum TCMaskTool : Int {
     /// Brush tool
     case brush = 0
-    /// Quick select tool
-    case quickSelect = 1
-    /// Hair brush tool
-    case hairBrush = 2
 }

@@ -113,8 +113,6 @@ class MaskViewController: UIViewController, UITabBarDelegate, MaskViewDelegate, 
     
     var isInNavigationViewController = false
 
-    var quickSelectToolItem: ToolItem!
-    var hairBrushToolItem: ToolItem!
     var brushToolItem: ToolItem!
     var toolItems = [ToolItem]()
     var settingSliderItems = [SettingSliderItem]()
@@ -129,14 +127,14 @@ class MaskViewController: UIViewController, UITabBarDelegate, MaskViewDelegate, 
     var initialMaskValue: UInt8 = 0
     var initialMaskArray: [UInt8]!
     var initialMaskSize: CGSize!
-    var initialToolType = TCMaskTool.quickSelect
+    var initialToolType = TCMaskTool.brush
     var initialState = TCMaskViewState.add
     var testDevices = [String]()
     
     
     var localizationDict = [String : String]()
     
-    var currentToolType: TCMaskTool = .quickSelect {
+    var currentToolType: TCMaskTool = .brush {
         didSet {
             let previousItem = findToolItem(type: oldValue)!
             let currentItem = findToolItem(type: currentToolType)!
@@ -305,10 +303,8 @@ class MaskViewController: UIViewController, UITabBarDelegate, MaskViewDelegate, 
         toolBox.addGestureRecognizer(toolBoxTapGesture)
 
         brushToolItem = ToolItem(type: .brush, name: "Brush", menuItem: brushToolMenuItem,settingView: brushSettingView)
-        quickSelectToolItem = ToolItem(type: .quickSelect, name: "QuickSelect", menuItem: quickSelectToolMenuItem, settingView: quickSelectSettingView)
-        hairBrushToolItem = ToolItem(type: .hairBrush, name: "HairBrush", menuItem: hairBrushToolMenuItem, settingView: hairBrushSettingView)
         
-        toolItems = [brushToolItem, quickSelectToolItem, hairBrushToolItem]
+        toolItems = [brushToolItem]
 
         updateUISettings()
         self.currentToolType = self.initialToolType
@@ -727,18 +723,6 @@ class MaskViewController: UIViewController, UITabBarDelegate, MaskViewDelegate, 
         let params = getToolParams()
         
         switch currentToolType {
-        case .quickSelect:
-            circleView.size = CGFloat(params.quickSelectBrushSize)
-            circleView.stroke = false
-            circleView.hardness = 1
-            circleView.alpha = 0.5
-            circleView.color = params.add ? UIColor.green : UIColor.red
-        case .hairBrush:
-            circleView.size = CGFloat(params.hairBrushBrushSize)
-            circleView.stroke = true
-            circleView.hardness = 1
-            circleView.alpha = 0.5
-            circleView.color = params.add ? UIColor.green : UIColor.red
         case .brush:
             circleView.size = CGFloat(params.brushSize)
             circleView.stroke = false

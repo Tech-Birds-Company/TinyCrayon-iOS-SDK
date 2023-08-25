@@ -95,7 +95,7 @@ open class TCMaskView : NSObject {
     @objc public init(image: UIImage) {
         self.image = image.imageWithFixedOrientation()
         self.viewModes = TCMaskView.defaultViewModes
-        self.initialTool = TCMaskTool.quickSelect
+        self.initialTool = TCMaskTool.brush
         self.prefersStatusBarHidden = false
         self.statusBarStyle = UIStatusBarStyle.default
         self.topBar = TCUIView()

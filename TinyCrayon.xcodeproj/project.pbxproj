@@ -44,18 +44,14 @@
 		7527FE2E270C1A1A00710086 /* MaskViewController.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7527FE0B270C1A1400710086 /* MaskViewController.strings */; };
 		7527FE2F270C1A1A00710086 /* TCMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7527FE0D270C1A1400710086 /* TCMask.swift */; };
 		7527FE30270C1A1A00710086 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7527FE0E270C1A1400710086 /* Extensions.swift */; };
-		7527FE31270C1A1A00710086 /* QuickSelectTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7527FE0F270C1A1500710086 /* QuickSelectTool.swift */; };
 		7527FE32270C1A1A00710086 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7527FE10270C1A1700710086 /* Assets.xcassets */; };
 		7527FE33270C1A1A00710086 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7527FE11270C1A1700710086 /* Utils.swift */; };
 		7527FE34270C1A1A00710086 /* BrushTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7527FE12270C1A1700710086 /* BrushTool.swift */; };
 		7527FE35270C1A1A00710086 /* Tool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7527FE13270C1A1700710086 /* Tool.swift */; };
 		7527FE36270C1A1A00710086 /* MaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7527FE14270C1A1700710086 /* MaskView.swift */; };
-		7527FE38270C1A1A00710086 /* HairBrushTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7527FE16270C1A1800710086 /* HairBrushTool.swift */; };
 		7527FE39270C1A1A00710086 /* TCUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7527FE17270C1A1800710086 /* TCUIView.swift */; };
 		7527FE3A270C1A1A00710086 /* WebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7527FE18270C1A1900710086 /* WebViewController.xib */; };
 		7527FE3B270C1A1A00710086 /* MaskViewWizard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7527FE19270C1A1900710086 /* MaskViewWizard.swift */; };
-		7527FE3C270C1A1A00710086 /* QuickSelectLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7527FE1A270C1A1900710086 /* QuickSelectLog.swift */; };
-		7527FE3D270C1A1A00710086 /* HairBrushLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7527FE1B270C1A1900710086 /* HairBrushLog.swift */; };
 		7527FE3F270C1A1A00710086 /* UILockableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7527FE1D270C1A1900710086 /* UILockableView.swift */; };
 		7527FE40270C1A1A00710086 /* ImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7527FE1E270C1A1900710086 /* ImageScrollView.swift */; };
 		7527FE41270C1A1A00710086 /* MaskViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7527FE20270C1A1A00710086 /* MaskViewController.xib */; };
@@ -122,18 +118,14 @@
 		7527FE0C270C1A1400710086 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = MaskViewController.strings; sourceTree = "<group>"; };
 		7527FE0D270C1A1400710086 /* TCMask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TCMask.swift; sourceTree = "<group>"; };
 		7527FE0E270C1A1400710086 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		7527FE0F270C1A1500710086 /* QuickSelectTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickSelectTool.swift; sourceTree = "<group>"; };
 		7527FE10270C1A1700710086 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7527FE11270C1A1700710086 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		7527FE12270C1A1700710086 /* BrushTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrushTool.swift; sourceTree = "<group>"; };
 		7527FE13270C1A1700710086 /* Tool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tool.swift; sourceTree = "<group>"; };
 		7527FE14270C1A1700710086 /* MaskView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskView.swift; sourceTree = "<group>"; };
-		7527FE16270C1A1800710086 /* HairBrushTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HairBrushTool.swift; sourceTree = "<group>"; };
 		7527FE17270C1A1800710086 /* TCUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TCUIView.swift; sourceTree = "<group>"; };
 		7527FE18270C1A1900710086 /* WebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebViewController.xib; sourceTree = "<group>"; };
 		7527FE19270C1A1900710086 /* MaskViewWizard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskViewWizard.swift; sourceTree = "<group>"; };
-		7527FE1A270C1A1900710086 /* QuickSelectLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickSelectLog.swift; sourceTree = "<group>"; };
-		7527FE1B270C1A1900710086 /* HairBrushLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HairBrushLog.swift; sourceTree = "<group>"; };
 		7527FE1D270C1A1900710086 /* UILockableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILockableView.swift; sourceTree = "<group>"; };
 		7527FE1E270C1A1900710086 /* ImageScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageScrollView.swift; sourceTree = "<group>"; };
 		7527FE21270C1A1A00710086 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = MaskViewController.xib; sourceTree = "<group>"; };
@@ -196,15 +188,11 @@
 				7527FE4E270C2D4500710086 /* CanvasView.swift */,
 				7527FE4D270C2D4500710086 /* CircleView.swift */,
 				7527FE0E270C1A1400710086 /* Extensions.swift */,
-				7527FE1B270C1A1900710086 /* HairBrushLog.swift */,
-				7527FE16270C1A1800710086 /* HairBrushTool.swift */,
 				7527FE1E270C1A1900710086 /* ImageScrollView.swift */,
 				7527FE14270C1A1700710086 /* MaskView.swift */,
 				7527FE07270C1A1400710086 /* MaskViewController.swift */,
 				7527FE19270C1A1900710086 /* MaskViewWizard.swift */,
-				7527FE1A270C1A1900710086 /* QuickSelectLog.swift */,
 				E1EA41FD2A99639A009FE14C /* ToolBarItem.swift */,
-				7527FE0F270C1A1500710086 /* QuickSelectTool.swift */,
 				7527FE0D270C1A1400710086 /* TCMask.swift */,
 				7527FE09270C1A1400710086 /* TCMaskTool.swift */,
 				7527FE01270C1A1300710086 /* TCMaskView.swift */,
@@ -239,9 +227,9 @@
 				7527FDCF270C095500710086 /* PaintSelect.cpp */,
 				7527FDD3270C095600710086 /* QuickGraphCut.cpp */,
 				7527FDF7270C0BCD00710086 /* opencv2.framework */,
+				7527FDC7270BEEA800710086 /* TCCore.h */,
 				7527FDDC270C095700710086 /* TCCoreLibs.h */,
 				7527FDDB270C095700710086 /* TCCoreLibs0.h */,
-				7527FDC7270BEEA800710086 /* TCCore.h */,
 				7527FDF4270C09FE00710086 /* TCCoreWrapper.h */,
 				7527FDD0270C095600710086 /* FGCGraph.hpp */,
 				7527FDD5270C095600710086 /* FGMM.hpp */,
@@ -420,7 +408,6 @@
 				7527FE2C270C1A1A00710086 /* TCMaskViewMode.swift in Sources */,
 				7527FE2D270C1A1A00710086 /* TCMaskTool.swift in Sources */,
 				7527FE36270C1A1A00710086 /* MaskView.swift in Sources */,
-				7527FE3D270C1A1A00710086 /* HairBrushLog.swift in Sources */,
 				7527FE35270C1A1A00710086 /* Tool.swift in Sources */,
 				7527FE2F270C1A1A00710086 /* TCMask.swift in Sources */,
 				7527FE25270C1A1A00710086 /* TCMaskView.swift in Sources */,
@@ -428,17 +415,14 @@
 				7527FE29270C1A1A00710086 /* TCMaskViewDelegate.swift in Sources */,
 				7527FE39270C1A1A00710086 /* TCUIView.swift in Sources */,
 				7527FE42270C1A1A00710086 /* ToolManager.swift in Sources */,
-				7527FE38270C1A1A00710086 /* HairBrushTool.swift in Sources */,
 				7527FE3B270C1A1A00710086 /* MaskViewWizard.swift in Sources */,
 				7527FE3F270C1A1A00710086 /* UILockableView.swift in Sources */,
 				7527FE23270C1A1A00710086 /* ToolLog.swift in Sources */,
-				7527FE31270C1A1A00710086 /* QuickSelectTool.swift in Sources */,
 				7527FE28270C1A1A00710086 /* BrushLog.swift in Sources */,
 				7527FE4F270C2D4500710086 /* CircleView.swift in Sources */,
 				E1EA41FE2A99639A009FE14C /* ToolBarItem.swift in Sources */,
 				7527FE40270C1A1A00710086 /* ImageScrollView.swift in Sources */,
 				7527FE30270C1A1A00710086 /* Extensions.swift in Sources */,
-				7527FE3C270C1A1A00710086 /* QuickSelectLog.swift in Sources */,
 				7527FE50270C2D4500710086 /* CanvasView.swift in Sources */,
 				7527FE27270C1A1A00710086 /* WebViewController.swift in Sources */,
 				7527FE34270C1A1A00710086 /* BrushTool.swift in Sources */,
