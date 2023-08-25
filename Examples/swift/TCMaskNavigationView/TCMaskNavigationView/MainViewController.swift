@@ -40,6 +40,7 @@ class MainViewController : UIViewController, UIImagePickerControllerDelegate, UI
         self.imagePicker.dismiss(animated: false, completion: {})
         
         let maskView = TCMaskView(image: image)
+        maskView.initialTool = .brush
         maskView.delegate = self
         maskView.presentFrom(navigationController: self.navigationController!, animated: true)
     }
