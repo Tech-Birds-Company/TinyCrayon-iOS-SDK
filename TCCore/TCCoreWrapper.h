@@ -12,21 +12,17 @@
 #import <UIKit/UIKit.h>
 #import "TCCoreLibs.h"
 
-typedef unsigned char uchar;
-typedef unsigned short ushort;
+typedef uint8_t uchar;
+typedef uint16_t ushort;
 
 @interface TCCore : NSObject {
     
 }
 
-+(void) rectcpy:(uchar *)dst src:(const uchar *)src srcSize:(CGSize)srcSize rect:(CGRect)rect;
 +(void) arrayCopy:(uchar *)dst src:(const uchar *)src count:(NSInteger)count;
 +(void) arrayCopy:(ushort *)dst src:(const uchar *)src length:(NSInteger)length;
-+(void) arraySet:(uchar *)dst value:(uchar)value count:(NSInteger)count;
 
 +(Boolean) arrayCheckAll:(const uchar *)array value:(uchar)value count:(NSInteger)count;
-
-+(Boolean) arrayCheckAny:(const uchar *)array value:(uchar)value count:(NSInteger)count;
 
 +(void) arrayResize:(uchar *)dst src:(const uchar *)src dstSize:(CGSize)dstSize srcSize:(CGSize)srcSize;
 
@@ -34,17 +30,12 @@ typedef unsigned short ushort;
 
 +(UIImage *) imageFromMask:(const uchar *)mask alpha:(const uchar *)alpha size:(CGSize)size rect:(CGRect)rect;
 
-+(Boolean) imageSelect:(const uchar *)imageData size:(CGSize)size mask:(uchar*)mask region:(const uchar *)region opacity:(uchar *)opacity mode:(NSInteger)mode edgeDetection:(Boolean)edgeDetection rect:(CGRect)rect outRect:(CGRect *)outRect;
-
 +(UIImage *) imageFromAlpha:(const uchar *)alpha size:(CGSize)size;
 +(UIImage *) imageFromAlpha:(const uchar *)alpha size:(CGSize)size rect:(CGRect)rect;
-+(void) maskFromAlpha:(const uchar *)alpha mask:(uchar *)mask size:(CGSize)size;
 
 +(void) pushMaskLog:(const uchar *)mask log:(unsigned short *)log count:(NSInteger)count offset:(NSInteger)offset;
 
 +(void) popMaskLog:(uchar *)mask log:(const unsigned short *)log count:(NSInteger)count offset:(NSInteger)offset;
-
-+(void) alphaFromMask:(const uchar *)mask alpha:(uchar *)alpha size:(CGSize)size;
 
 +(void) updateMask:(uchar *)mask alpha:(const uchar *)alpha region:(const uchar *)region count:(NSInteger)count;
 

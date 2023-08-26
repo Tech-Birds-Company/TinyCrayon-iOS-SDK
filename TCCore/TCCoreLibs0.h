@@ -10,7 +10,6 @@
 #define TCCoreLibs0_h
 
 #include "TCCoreLibs.h"
-#include <opencv2/opencv.hpp>
 
 #define TC_ASSERT(_exp, _msg, ...) do {                \
 if (!(_exp)) { printf(_msg, ##__VA_ARGS__);            \

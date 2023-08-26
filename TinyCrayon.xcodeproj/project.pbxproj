@@ -8,15 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		7527FDC9270BEEA800710086 /* TCCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 7527FDC7270BEEA800710086 /* TCCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7527FDE2270C095700710086 /* PaintSelect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7527FDCF270C095500710086 /* PaintSelect.cpp */; };
-		7527FDE5270C095700710086 /* PaintSelect.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7527FDD2270C095600710086 /* PaintSelect.hpp */; };
-		7527FDE9270C095700710086 /* KCenterClustering.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7527FDD6270C095600710086 /* KCenterClustering.hpp */; };
 		7527FDEA270C095700710086 /* improc.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7527FDD7270C095600710086 /* improc.hpp */; };
 		7527FDEC270C095700710086 /* improc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7527FDD9270C095600710086 /* improc.cpp */; };
-		7527FDED270C095700710086 /* precomp.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7527FDDA270C095700710086 /* precomp.hpp */; };
 		7527FDEE270C095700710086 /* TCCoreLibs0.h in Headers */ = {isa = PBXBuildFile; fileRef = 7527FDDB270C095700710086 /* TCCoreLibs0.h */; };
 		7527FDEF270C095700710086 /* TCCoreLibs.h in Headers */ = {isa = PBXBuildFile; fileRef = 7527FDDC270C095700710086 /* TCCoreLibs.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7527FDF2270C095700710086 /* KCenterClustering.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7527FDDF270C095700710086 /* KCenterClustering.cpp */; };
 		7527FDF5270C09FE00710086 /* TCCoreWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7527FDF3270C09FE00710086 /* TCCoreWrapper.mm */; };
 		7527FDF6270C09FE00710086 /* TCCoreWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 7527FDF4270C09FE00710086 /* TCCoreWrapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7527FDFC270C0C2000710086 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7527FDFB270C0C2000710086 /* CoreGraphics.framework */; };
@@ -50,9 +45,10 @@
 		7527FE49270C1A9600710086 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7527FE48270C1A9600710086 /* libstdc++.dylib */; };
 		7527FE4F270C2D4500710086 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7527FE4D270C2D4500710086 /* CircleView.swift */; };
 		7527FE50270C2D4500710086 /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7527FE4E270C2D4500710086 /* CanvasView.swift */; };
-		7527FE51270C386600710086 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7527FDF7270C0BCD00710086 /* opencv2.framework */; };
-		7527FE54270C388200710086 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7527FDF7270C0BCD00710086 /* opencv2.framework */; };
 		E1EA41FE2A99639A009FE14C /* ToolBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1EA41FD2A99639A009FE14C /* ToolBarItem.swift */; };
+		E1EA42022A998925009FE14C /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1EA42012A998925009FE14C /* Metal.framework */; };
+		E1EA42062A99FFFB009FE14C /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1EA42052A99FFFA009FE14C /* opencv2.framework */; };
+		E1EA42082A9A039F009FE14C /* precomp.hpp in Headers */ = {isa = PBXBuildFile; fileRef = E1EA42072A9A039F009FE14C /* precomp.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,18 +67,12 @@
 		7527FDC5270BEEA700710086 /* TCCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TCCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7527FDC7270BEEA800710086 /* TCCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TCCore.h; sourceTree = "<group>"; };
 		7527FDC8270BEEA800710086 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7527FDCF270C095500710086 /* PaintSelect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PaintSelect.cpp; sourceTree = "<group>"; };
-		7527FDD2270C095600710086 /* PaintSelect.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PaintSelect.hpp; sourceTree = "<group>"; };
-		7527FDD6270C095600710086 /* KCenterClustering.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = KCenterClustering.hpp; sourceTree = "<group>"; };
 		7527FDD7270C095600710086 /* improc.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = improc.hpp; sourceTree = "<group>"; };
 		7527FDD9270C095600710086 /* improc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = improc.cpp; sourceTree = "<group>"; };
-		7527FDDA270C095700710086 /* precomp.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = precomp.hpp; sourceTree = "<group>"; };
 		7527FDDB270C095700710086 /* TCCoreLibs0.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCCoreLibs0.h; sourceTree = "<group>"; };
 		7527FDDC270C095700710086 /* TCCoreLibs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCCoreLibs.h; sourceTree = "<group>"; };
-		7527FDDF270C095700710086 /* KCenterClustering.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = KCenterClustering.cpp; sourceTree = "<group>"; };
 		7527FDF3270C09FE00710086 /* TCCoreWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TCCoreWrapper.mm; sourceTree = "<group>"; };
 		7527FDF4270C09FE00710086 /* TCCoreWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCCoreWrapper.h; sourceTree = "<group>"; };
-		7527FDF7270C0BCD00710086 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
 		7527FDFB270C0C2000710086 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.3.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
 		7527FDFD270C0C2A00710086 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.3.sdk/System/iOSSupport/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		7527FDFF270C1A1300710086 /* ToolLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolLog.swift; sourceTree = "<group>"; };
@@ -114,6 +104,9 @@
 		7527FE4D270C2D4500710086 /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		7527FE4E270C2D4500710086 /* CanvasView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
 		E1EA41FD2A99639A009FE14C /* ToolBarItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolBarItem.swift; sourceTree = "<group>"; };
+		E1EA42012A998925009FE14C /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/System/Library/Frameworks/Metal.framework; sourceTree = DEVELOPER_DIR; };
+		E1EA42052A99FFFA009FE14C /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
+		E1EA42072A9A039F009FE14C /* precomp.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = precomp.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,7 +114,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7527FE54270C388200710086 /* opencv2.framework in Frameworks */,
 				7527FE49270C1A9600710086 /* libstdc++.dylib in Frameworks */,
 				7527FE43270C1A6D00710086 /* TCCore.framework in Frameworks */,
 			);
@@ -131,8 +123,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7527FE51270C386600710086 /* opencv2.framework in Frameworks */,
 				7527FDFC270C0C2000710086 /* CoreGraphics.framework in Frameworks */,
+				E1EA42022A998925009FE14C /* Metal.framework in Frameworks */,
+				E1EA42062A99FFFB009FE14C /* opencv2.framework in Frameworks */,
 				7527FDFE270C0C2A00710086 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -199,17 +192,13 @@
 			isa = PBXGroup;
 			children = (
 				7527FDD9270C095600710086 /* improc.cpp */,
-				7527FDDF270C095700710086 /* KCenterClustering.cpp */,
-				7527FDCF270C095500710086 /* PaintSelect.cpp */,
-				7527FDF7270C0BCD00710086 /* opencv2.framework */,
 				7527FDC7270BEEA800710086 /* TCCore.h */,
 				7527FDDC270C095700710086 /* TCCoreLibs.h */,
 				7527FDDB270C095700710086 /* TCCoreLibs0.h */,
 				7527FDF4270C09FE00710086 /* TCCoreWrapper.h */,
+				E1EA42052A99FFFA009FE14C /* opencv2.framework */,
 				7527FDD7270C095600710086 /* improc.hpp */,
-				7527FDD6270C095600710086 /* KCenterClustering.hpp */,
-				7527FDD2270C095600710086 /* PaintSelect.hpp */,
-				7527FDDA270C095700710086 /* precomp.hpp */,
+				E1EA42072A9A039F009FE14C /* precomp.hpp */,
 				7527FDF3270C09FE00710086 /* TCCoreWrapper.mm */,
 				7527FDC8270BEEA800710086 /* Info.plist */,
 			);
@@ -219,6 +208,7 @@
 		7527FDFA270C0C2000710086 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E1EA42012A998925009FE14C /* Metal.framework */,
 				7527FE48270C1A9600710086 /* libstdc++.dylib */,
 				7527FDFD270C0C2A00710086 /* UIKit.framework */,
 				7527FDFB270C0C2000710086 /* CoreGraphics.framework */,
@@ -257,13 +247,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				7527FDEA270C095700710086 /* improc.hpp in Headers */,
+				E1EA42082A9A039F009FE14C /* precomp.hpp in Headers */,
 				7527FDEE270C095700710086 /* TCCoreLibs0.h in Headers */,
-				7527FDE5270C095700710086 /* PaintSelect.hpp in Headers */,
 				7527FDC9270BEEA800710086 /* TCCore.h in Headers */,
 				7527FDEF270C095700710086 /* TCCoreLibs.h in Headers */,
 				7527FDF6270C09FE00710086 /* TCCoreWrapper.h in Headers */,
-				7527FDE9270C095700710086 /* KCenterClustering.hpp in Headers */,
-				7527FDED270C095700710086 /* precomp.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,8 +389,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7527FDE2270C095700710086 /* PaintSelect.cpp in Sources */,
-				7527FDF2270C095700710086 /* KCenterClustering.cpp in Sources */,
 				7527FDEC270C095700710086 /* improc.cpp in Sources */,
 				7527FDF5270C09FE00710086 /* TCCoreWrapper.mm in Sources */,
 			);

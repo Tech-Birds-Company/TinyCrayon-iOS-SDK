@@ -14,19 +14,11 @@
 #include "TCCoreLibs0.h"
 #include "improc.hpp"
 
+typedef uint8_t uchar;
+typedef uint16_t ushort;
+typedef unsigned int uint;
 
 @implementation TCCore
-
-+(void) rectcpy:(uchar *)dst src:(const uchar *)src srcSize:(CGSize)srcSize rect:(CGRect)rect {
-    cv::Point p;
-    for (int j = 0; j < rect.size.height; j++) {
-        for (int i = 0; i < rect.size.width; i++) {
-            int srcIdx = (int)(srcSize.width * (rect.origin.y + j) + rect.origin.x + i);
-            int dstIdx = (int)(rect.size.width * j + i);
-            dst[dstIdx] = src[srcIdx];
-        }
-    }
-}
 
 +(void) arrayCopy:(uchar *)dst src:(const uchar *)src count:(NSInteger)count {
     arrcpy(dst, src, (int)count);
@@ -34,10 +26,6 @@
 
 +(void) arrayCopy:(ushort *)dst src:(const uchar *)src length:(NSInteger)length {
     arrcpy(dst, src, (int)length);
-}
-
-+(void) arraySet:(uchar *)dst value:(uchar)value count:(NSInteger)count {
-    arrset(dst, value, (int)count);
 }
 
 +(Boolean) arrayCheckAll:(const uchar *)arr value:(uchar)value count:(NSInteger)count {
@@ -49,21 +37,19 @@
 }
 
 +(void) arrayResize:(uchar *)dst src:(const uchar *)src dstSize:(CGSize)dstSize srcSize:(CGSize)srcSize {
-    cv::Size cvSrcSize(srcSize.width, srcSize.height);
-    cv::Size cvDstSize(dstSize.width, dstSize.height);
-    arrresize(dst, src, cvDstSize, cvSrcSize);
+    arrresize(dst, src, dstSize.width, dstSize.height, srcSize.width, srcSize.height);
 }
 
-// convert from UIImage to cv::Mat or vise versa
-// http://docs.opencv.org/2.4.8/doc/tutorials/ios/image_manipulation/image_manipulation.html
-
+//// convert from UIImage to cv::Mat or vise versa
+//// http://docs.opencv.org/2.4.8/doc/tutorials/ios/image_manipulation/image_manipulation.html
+//
 // convert UIImage to color cv::Mat
 +(cv::Mat)cvMatFromUIImage:(UIImage *)image
 {
     CGColorSpaceRef colorSpace = CGImageGetColorSpace(image.CGImage);
     CGFloat cols = image.size.width;
     CGFloat rows = image.size.height;
-    
+
     cv::Mat cvMat(rows, cols, CV_8UC4); // 8 bits per component, 4 channels (color channels + alpha)
 
     CGContextRef contextRef = CGBitmapContextCreate(cvMat.data,                 // Pointer to  data
@@ -74,10 +60,10 @@
                                                     colorSpace,                 // Colorspace
                                                     kCGImageAlphaNoneSkipLast |
                                                     kCGBitmapByteOrderDefault); // Bitmap info flags
-    
+
     CGContextDrawImage(contextRef, CGRectMake(0, 0, cols, rows), image.CGImage);
     CGContextRelease(contextRef);
-    
+
     return cvMat;
 }
 
@@ -95,9 +81,9 @@
     CGColorSpaceRef colorSpace = CGImageGetColorSpace(image.CGImage);
     CGFloat cols = image.size.width;
     CGFloat rows = image.size.height;
-    
+
     cv::Mat cvMat(rows, cols, CV_8UC1); // 8 bits per component, 1 channels
-    
+
     CGContextRef contextRef = CGBitmapContextCreate(cvMat.data,                 // Pointer to data
                                                     cols,                       // Width of bitmap
                                                     rows,                       // Height of bitmap
@@ -106,10 +92,10 @@
                                                     colorSpace,                 // Colorspace
                                                     kCGImageAlphaNoneSkipLast |
                                                     kCGBitmapByteOrderDefault); // Bitmap info flags
-    
+
     CGContextDrawImage(contextRef, CGRectMake(0, 0, cols, rows), image.CGImage);
     CGContextRelease(contextRef);
-    
+
     return cvMat;
 }
 
@@ -123,13 +109,13 @@
 {
     NSData *data = [NSData dataWithBytes:cvMat.data length:cvMat.elemSize()*cvMat.total()];
     CGColorSpaceRef colorSpace;
-    
+
     if (cvMat.elemSize() == 1) {
         colorSpace = CGColorSpaceCreateDeviceGray();
     } else {
         colorSpace = CGColorSpaceCreateDeviceRGB();
     }
-        
+
     CGDataProviderRef provider = CGDataProviderCreateWithCFData((__bridge CFDataRef)data);
 
     // Creating CGImage from cv::Mat
@@ -145,14 +131,14 @@
                                         false,                                      //should interpolate
                                         kCGRenderingIntentDefault                   //intent
                                         );
-    
-    
+
+
     // Getting UIImage from CGImage
     UIImage *finalImage = [UIImage imageWithCGImage:imageRef];
     CGImageRelease(imageRef);
     CGDataProviderRelease(provider);
     CGColorSpaceRelease(colorSpace);
-    
+
     return finalImage;
 }
 
@@ -160,7 +146,7 @@
     cv::Mat img = [self cvMatFromUIImage:image];
     cv::Mat result;
     cv::Point off;
-    
+
     if (!improcImageWithAlpha(img, alphaData, compact, off, result)) {
         return nil;
     }
@@ -174,16 +160,16 @@
     cv::Mat img;
 
     improcMaskToImage(mask, alpha, cv::Size(size.width, size.height), cvRect, img);
-    
+
     return [self UIImageFromCVMat:img];
 }
 
 +(Boolean) imageSelect:(const uchar *)imageData size:(CGSize)size mask:(uchar*)mask region:(const uchar *)region opacity:(uchar *)opacity mode:(NSInteger)mode edgeDetection:(Boolean)edgeDetection rect:(CGRect)rect outRect:(CGRect *)outRect {
-    
+
     cv::Rect cvRect = cv::Rect(rect.origin.x, rect.origin.y, rect.size.width, rect.size.height);
     cv::Size cvSize = cv::Size(size.width, size.height);
     cv::Rect cvOutRect;
-    
+
     if (improcImageSelect(imageData, cvSize, mask, region, opacity, (int)mode, edgeDetection, cvRect, cvOutRect)) {
         *outRect = CGRectMake(cvOutRect.x, cvOutRect.y, cvOutRect.width, cvOutRect.height);
         return true;
@@ -198,10 +184,10 @@
     cv::Mat img;
     cv::Size cvSize = cv::Size(size.width, size.height);
     cv::Rect cvRect = cv::Rect(rect.origin.x, rect.origin.y, rect.size.width, rect.size.height);
-    
+
     if (cvRect.width == 0 || cvRect.height == 0)
         return nil;
-    
+
     improcAlphaToImage(alpha, cvSize, cvRect, img);
     return [self UIImageFromCVMat:img];
 }
@@ -224,12 +210,6 @@
     improcPopMaskLog(mask, log, (int)count, (int)offset);
 }
 
-+(void) alphaFromMask:(const uchar *)mask alpha:(uchar *)alpha size:(CGSize)size {
-    cv::Size cvSize(size.width, size.height);
-    cv::Rect cvRect(0, 0, cvSize.width, cvSize.height);
-    improcMaskToAlpha(mask, alpha, alpha, cvSize, cvRect);
-}
-
 +(void) updateMask:(uchar *)mask alpha:(const uchar *)alpha region:(const uchar *)region count:(NSInteger)count {
     improcUpdateMask(mask, alpha, region, (int)count);
 }
@@ -240,9 +220,9 @@
     cv::Rect cvOutRect;
 
     bool retval = improcDrawRadialGradient(alpha, cvSize, cvCenter, startValue, startRadius, endValue, endRadius, cvOutRect, add);
-    
+
     *outRect = CGRectMake(cvOutRect.x, cvOutRect.y, cvOutRect.width, cvOutRect.height);
-    
+
     return retval;
 }
 

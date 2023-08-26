@@ -10,30 +10,11 @@
 #include <ctime>
 #include "improc.hpp"
 #include "TCCoreLibs0.h"
-#include "PaintSelect.hpp"
+#include <cassert>
+#include <vector>
 
 #define SMOOTH_RADIUS    3
 #define SMOOTH_SOFTNESS 27
-
-static void improcSmoothAlpha(cv::Mat &alpha) {
-    int r = SMOOTH_RADIUS;
-    int softness = SMOOTH_SOFTNESS;
-    
-    cv::GaussianBlur(alpha, alpha, cv::Size(2*r+1, 2*r+1), 0, 0);
-    
-    uchar high = 128 + softness;
-    uchar low = 127 - softness;
-    
-    cv::Point p;
-    for (p.y = 0; p.y < alpha.rows; p.y++) {
-        for (p.x = 0; p.x < alpha.cols; p.x++) {
-            int val = alpha.at<uchar>(p);
-            double scale = (double)(val - low) / (double)(high - low);
-            scale = MIN(1, MAX(0, scale));
-            alpha.at<uchar>(p) = scale * 255;
-        }
-    }
-}
 
 void arrcpy(uchar *dst, const uchar *src, int count) {
     memcpy(dst, src, count);
@@ -62,10 +43,36 @@ bool arrckany(const uchar *arr, uchar value, int count) {
     return false;
 }
 
-void arrresize(uchar *dst, const uchar *src, cv::Size dstSize, cv::Size srcSize) {
-    cv::Mat dstMat(dstSize, CV_8UC1, dst);
-    cv::Mat srcMat(srcSize, CV_8UC1, (uchar *)src);
-    cv::resize(srcMat, dstMat, dstSize, 0, 0, INTER_CUBIC);
+void arrresize(uchar* dst, const uchar* src, int dstWidth, int dstHeight, int srcWidth, int srcHeight)
+{
+    for (int y = 0; y < dstHeight; ++y)
+    {
+        for (int x = 0; x < dstWidth; ++x)
+        {
+            float srcX = x * (srcWidth - 1) / static_cast<float>(dstWidth - 1);
+            float srcY = y * (srcHeight - 1) / static_cast<float>(dstHeight - 1);
+
+            int srcX0 = std::floor(srcX);
+            int srcY0 = std::floor(srcY);
+            int srcX1 = std::ceil(srcX);
+            int srcY1 = std::ceil(srcY);
+
+            float xWeight = srcX - srcX0;
+            float yWeight = srcY - srcY0;
+
+            uchar pixel00 = src[srcY0 * srcWidth + srcX0];
+            uchar pixel01 = src[srcY0 * srcWidth + srcX1];
+            uchar pixel10 = src[srcY1 * srcWidth + srcX0];
+            uchar pixel11 = src[srcY1 * srcWidth + srcX1];
+
+            uchar interpolatedPixel = static_cast<uchar>((1 - xWeight) * (1 - yWeight) * pixel00 +
+                                                         xWeight * (1 - yWeight) * pixel01 +
+                                                         (1 - xWeight) * yWeight * pixel10 +
+                                                         xWeight * yWeight * pixel11);
+
+            dst[y * dstWidth + x] = interpolatedPixel;
+        }
+    }
 }
 
 bool improcImageWithAlpha(const Mat &img, const uchar *alphaData, bool compact, Point &offset, Mat &result, bool argb) {
@@ -75,7 +82,7 @@ bool improcImageWithAlpha(const Mat &img, const uchar *alphaData, bool compact, 
     int bottom = 0;
     int left = alpha.cols - 1;
     int right = 0;
-    
+
     if (compact) {
         for (p.y = 0; p.y < alpha.rows; p.y++) {
             for (p.x = 0; p.x < alpha.cols; p.x++) {
@@ -88,7 +95,7 @@ bool improcImageWithAlpha(const Mat &img, const uchar *alphaData, bool compact, 
                 right = MAX(right, p.x);
             }
         }
-        
+
         if (top > bottom || left > right) {
             return false;
         }
@@ -99,7 +106,7 @@ bool improcImageWithAlpha(const Mat &img, const uchar *alphaData, bool compact, 
         right = img.cols - 1;
         bottom = img.rows - 1;
     }
-    
+
     result.create(bottom - top + 1, right - left + 1, CV_8UC4);
     if (argb) {
         for (p.y = top; p.y <= bottom; p.y++) {
@@ -120,10 +127,10 @@ bool improcImageWithAlpha(const Mat &img, const uchar *alphaData, bool compact, 
         }
     }
 
-    
+
     offset.x = left;
     offset.y = top;
-    
+
     return true;
 }
 
@@ -137,11 +144,11 @@ void improcMaskToImage(const uchar *maskData, const uchar *opacityData, cv::Size
 }
 
 bool improcImageSelect(const uchar *imageData, cv::Size size, uchar *maskData, const uchar *regionData, const uchar *opacityData, int mode, bool edgeDetection, cv::Rect rect, cv::Rect &outRect) {
-    
+
     assert(size.width > 0 && size.height > 0);
     assert(rect.x >= 0 && rect.y >= 0);
     assert(rect.x + rect.width <= size.width && rect.y + rect.height <= size.height);
-    
+
     cv::Mat img(size, CV_8UC4, (uchar *)imageData);
     Mat mask = Mat(size, CV_8UC1, maskData);
     Mat region = Mat(size, CV_8UC1, (uchar *)regionData);
@@ -149,30 +156,25 @@ bool improcImageSelect(const uchar *imageData, cv::Size size, uchar *maskData, c
     cv::Point p;
     cv::Mat maskVal = cv::Mat(rect.size(), CV_8UC1);
     cv::Mat result = cv::Mat(rect.height, rect.width, CV_8UC1);
-    
+
     int top = mask.rows - 1;
     int bottom = 0;
     int left = mask.cols - 1;
     int right = 0;
-    
+
     for (p.y = 0; p.y < maskVal.rows; p.y++) {
         for (p.x = 0; p.x < maskVal.cols; p.x++) {
             maskVal.at<uchar>(p) = GC_VAL((mask.at<uchar>(cv::Point(p.x+rect.x, p.y + rect.y))));
         }
     }
-    
-    if (edgeDetection) {
-        paintSelect(img(rect), maskVal, region(rect), result, mode);
-    }
-    else {
-        for (p.y = 0; p.y < rect.height; p.y++) {
-            for (p.x = 0; p.x < rect.width; p.x++) {
-                cv::Point q = cv::Point(p.x + rect.x, p.y + rect.y);
-                if (region.at<uchar>(q) != GC_UNINIT)
-                    result.at<uchar>(p) = mode == GC_MODE_FGD? GC_MASK_FGD : GC_MASK_BGD;
-                else
-                    result.at<uchar>(p) = maskVal.at<uchar>(p);
-            }
+
+    for (p.y = 0; p.y < rect.height; p.y++) {
+        for (p.x = 0; p.x < rect.width; p.x++) {
+            cv::Point q = cv::Point(p.x + rect.x, p.y + rect.y);
+            if (region.at<uchar>(q) != GC_UNINIT)
+                result.at<uchar>(p) = mode == GC_MODE_FGD? GC_MASK_FGD : GC_MASK_BGD;
+            else
+                result.at<uchar>(p) = maskVal.at<uchar>(p);
         }
     }
 
@@ -180,19 +182,19 @@ bool improcImageSelect(const uchar *imageData, cv::Size size, uchar *maskData, c
     for (p.y = 0; p.y < rect.height; p.y++) {
         for (p.x = 0; p.x < rect.width; p.x++) {
             cv::Point q = cv::Point(p.x + rect.x, p.y + rect.y);
-            
+
             maskHasAlpha = bit(mask.at<uchar>(q), GC_FLAG_ALPHA);
-            
+
             if ((GC_LABEL_CHANGED(maskVal.at<uchar>(p), result.at<uchar>(p))) ||
                 (maskHasAlpha && region.at<uchar>(q) != GC_UNINIT) ||
                 (maskHasAlpha && maskVal.at<uchar>(p) != result.at<uchar>(p)))
             {
                 bic(mask.at<uchar>(q), GC_FLAG_ALPHA);
             }
-            
+
             bic(mask.at<uchar>(q), GC_MASK);
             mask.at<uchar>(q) |= result.at<uchar>(p) & GC_MASK;
-            
+
             uchar previousAlpha = maskHasAlpha ? opacity.at<uchar>(q) : GC_IS_BGD(maskVal.at<uchar>(p)) ?  0 : 255;
             uchar currentAlpha = bit(mask.at<uchar>(q), GC_FLAG_ALPHA) ? opacity.at<uchar>(q) : GC_IS_BGD(mask.at<uchar>(q)) ?  0 : 255;
             if (previousAlpha != currentAlpha) {
@@ -217,12 +219,12 @@ bool improcImageSelect(const uchar *imageData, cv::Size size, uchar *maskData, c
             }
         }
     }
-    
+
     if (top > bottom || left > right) {
         outRect = cv::Rect(0, 0, 0, 0);
         return false;
     }
-    
+
     int r = SMOOTH_RADIUS;
     top = MAX(0, top - r);
     left = MAX(0, left - r);
@@ -237,7 +239,7 @@ void improcAlphaToImage(const uchar *alphaData, cv::Size size, cv::Rect rect, cv
     cv::Mat alpha(size, CV_8UC1, (uchar *)alphaData);
     img.create(rect.size(), CV_8UC4);
     cv::Point p;
-    
+
     for (p.y = 0; p.y < img.rows; p.y++) {
         for (p.x = 0; p.x < img.cols; p.x++) {
             cv::Point q(p.x + rect.x, p.y + rect.y);
@@ -251,7 +253,7 @@ void improcAlphaToMask(const uchar *alphaData, uchar *maskData, cv::Size size, c
     cv::Mat alpha(size, CV_8UC1, (uchar *)alphaData);
     cv::Mat mask(size, CV_8UC1, maskData);
     cv::Point p;
-    
+
     mask.setTo(0);
     for (p.y = rect.y; p.y < rect.y + rect.height; p.y++) {
         for (p.x = rect.x; p.x < rect.x + rect.width; p.x++) {
@@ -259,7 +261,7 @@ void improcAlphaToMask(const uchar *alphaData, uchar *maskData, cv::Size size, c
                 mask.at<uchar>(p) = GC_MASK_PR_BGD;
             else
                 mask.at<uchar>(p) = GC_MASK_PR_FGD;
-            
+
             bis(mask.at<uchar>(p), GC_FLAG_ALPHA);
         }
     }
@@ -293,10 +295,10 @@ void improcMaskToAlpha(const uchar *mask, const uchar *opacity, uchar *alpha, cv
     int left = MAX(0, rect.x - r);
     int bottom = MIN(size.height, rect.y + rect.height + r);
     int right = MIN(size.width, rect.x + rect.width + r);
-    
+
     cv::Rect outerRect(left, top, right - left, bottom - top);
     cv::Mat smoothed(outerRect.size(), CV_8UC1);
-    
+
     for (p.y = 0; p.y < smoothed.rows; p.y++) {
         for (p.x = 0; p.x < smoothed.cols; p.x++) {
             cv::Point q(p.x + outerRect.x, p.y + outerRect.y);
@@ -308,9 +310,7 @@ void improcMaskToAlpha(const uchar *mask, const uchar *opacity, uchar *alpha, cv
             }
         }
     }
-    
-    improcSmoothAlpha(smoothed);
-    
+
     for (p.y = 0; p.y < alphaMat.rows; p.y++) {
         for (p.x = 0; p.x < alphaMat.cols; p.x++) {
             cv::Point q(p.x + rect.x - outerRect.x, p.y + rect.y - outerRect.y);
@@ -319,7 +319,7 @@ void improcMaskToAlpha(const uchar *mask, const uchar *opacity, uchar *alpha, cv
             cv::Point top(r.x, MAX(0, r.y - SMOOTH_RADIUS));
             cv::Point right(MIN(size.width - 1, r.x + SMOOTH_RADIUS), r.y);
             cv::Point bottom(r.x, MIN(size.height - 1, r.y + SMOOTH_RADIUS));
-            
+
             if (!bit(maskMat.at<uchar>(r), GC_FLAG_ALPHA) ||
                 !bit(maskMat.at<uchar>(top), GC_FLAG_ALPHA) ||
                 !bit(maskMat.at<uchar>(left), GC_FLAG_ALPHA) ||
@@ -358,13 +358,12 @@ void improcInvertMask(uchar *mask, int count) {
         mask[i] ^= GC_MASK;
 }
 
-bool improcLogEncodeArray(const uchar *arr, int count, uint *buf, int bufLen, int *processed, int *offset) {
-    Mat zero(1, count, CV_8UC1);
-    zero.setTo(0);
-    return improcLogEncodeDiff(zero.data, arr, count, buf, bufLen, processed, offset);
+bool improcLogEncodeArray(const uchar *arr, int count, unsigned int *buf, int bufLen, int *processed, int *offset) {
+    std::vector<unsigned char> zero(count, 0);
+    return improcLogEncodeDiff(zero.data(), arr, count, buf, bufLen, processed, offset);
 }
 
-bool improcLogEncodeDiff(const uchar *from, const uchar *to, int count, uint *buf, int bufLen, int *processed, int *offset) {
+bool improcLogEncodeDiff(const uchar *from, const uchar *to, int count, unsigned int *buf, int bufLen, int *processed, int *offset) {
     
 #define ENCODE_MAX_LEN  0x1000000
     
@@ -408,20 +407,20 @@ bool improcLogEncodeDiff(const uchar *from, const uchar *to, int count, uint *bu
 }
 
 void improcLogDecodeArray(uchar *decoded, const uint *encoded, int decodedCount, int incodedCount) {
-    Mat zero(1, decodedCount, CV_8UC1);
-    zero.setTo(0);
-    improcLogDecodeDiff(decoded, zero.data, encoded, decodedCount, incodedCount);
+    //Mat zero(1, decodedCount, CV_8UC1);
+    std::vector<unsigned char> zero(decodedCount, 0);
+    improcLogDecodeDiff(decoded, zero.data(), encoded, decodedCount, incodedCount);
 }
 
 void improcLogDecodeDiff(uchar *to, const uchar *from, const uint *diff, int count, int diffCount) {
-    
+
     memcpy(to, from, count);
     int idx = 0;
     for (int i = 0; i < diffCount; i++) {
-        uint value = diff[i];
+        unsigned int value = diff[i];
         uchar diff = value & 0xFF;
         int length = value >> 8;
-        
+
         for (int j = 0; j < length; j++) {
             to[idx] = from[idx] ^ diff;
             idx++;
