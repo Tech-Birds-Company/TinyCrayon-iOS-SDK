@@ -21,13 +21,13 @@ typedef uint16_t ushort;
 typedef unsigned int uint;
 
 void arrcpy(uchar *dst, const uchar *src, int count);
-void arrcpy(ushort *dst, const uchar *src, int count);
+//void arrcpy(ushort *dst, const uchar *src, int count);
 
-void arrset(uchar *dst, uchar value, int count);
+//void arrset(uchar *dst, uchar value, int count);
 
 bool arrckall(const uchar *arr, uchar value, int count);
 
-bool arrckany(const uchar *arr, uchar value, int count);
+//bool arrckany(const uchar *arr, uchar value, int count);
 
 void arrresize(uchar* dst, const uchar* src, int dstWidth, int dstHeight, int srcWidth, int srcHeight);
 
@@ -45,7 +45,7 @@ void arrresize(uchar* dst, const uchar* src, int dstWidth, int dstHeight, int sr
 //
 //   NOTES:
 //
-void improcPushMaskLog(const uchar *mask, unsigned short *log, int count, int offset);
+//void improcPushMaskLog(const uchar *mask, unsigned short *log, int count, int offset);
 
 //
 //   NAME: improcPopMaskLog
@@ -65,7 +65,7 @@ void improcPushMaskLog(const uchar *mask, unsigned short *log, int count, int of
 //   NOTES:
 //        None
 //
-void improcPopMaskLog(uchar *mask, const unsigned short *log, int count, int offset);
+//void improcPopMaskLog(uchar *mask, const unsigned short *log, int count, int offset);
 
 //
 //   NAME: improcUpdateMask
@@ -85,12 +85,12 @@ void improcPopMaskLog(uchar *mask, const unsigned short *log, int count, int off
 //   NOTES:
 //        None
 //
-void improcUpdateMask(uchar *mask, const uchar *alpha, const uchar *region, int count);
+//void improcUpdateMask(uchar *mask, const uchar *alpha, const uchar *region, int count);
 
 
 void improcInvertAlpha(uchar *alpha, int count);
 
-void improcInvertMask(uchar *alpha, int count);
+//void improcInvertMask(uchar *alpha, int count);
 
 bool improcLogEncodeDiff(const uchar *from, const uchar *to, int count, uint *buf, int bufLen, int *processed, int *offset);
 
@@ -98,14 +98,14 @@ bool improcLogEncodeArray(const uchar *arr, int count, uint *buf, int bufLen, in
 
 void improcLogDecodeDiff(uchar *to, const uchar *from, const uint *diff, int count, int diffCount);
 
-void improcLogDecodeArray(uchar *decoded, const uint *encoded, int decodedCount, int incodedCount);
+//void improcLogDecodeArray(uchar *decoded, const uint *encoded, int decodedCount, int incodedCount);
 
 bool improcDrawRadialGradient(uchar *alpha, cv::Size size, cv::Point center, int startV, int startR, int endV, int endR, cv::Rect &outRect, bool add);
 bool improcImageWithAlpha(const Mat &img, const uchar *alphaData, bool compact, cv::Point &offset, Mat &result, bool argb = false);
-void improcMaskToImage(const uchar *maskData, const uchar *opacityData, cv::Size size, cv::Rect rect, Mat &img);
+//void improcMaskToImage(const uchar *maskData, const uchar *opacityData, cv::Size size, cv::Rect rect, Mat &img);
 bool improcImageSelect(const uchar *imageData, cv::Size size, uchar *maskData, const uchar *regionData, const uchar *opacityData, int mode, bool edgeDetection, cv::Rect rect, cv::Rect &outRect);
 void improcAlphaToImage(const uchar *alphaData, cv::Size size, cv::Rect rect, cv::Mat &img);
 void improcAlphaToMask(const uchar *alpha, uchar *mask, cv::Size size, cv::Rect rect);
-void improcMaskToAlpha(const uchar *mask, const uchar *opacity, uchar *alpha, cv::Size size, cv::Rect rect);
+//void improcMaskToAlpha(const uchar *mask, const uchar *opacity, uchar *alpha, cv::Size size, cv::Rect rect);
 
 #endif /* improc_hpp */

@@ -25,9 +25,9 @@ void arrcpy(ushort *dst, const uchar *src, int count) {
         dst[i] = src[i];
 }
 
-void arrset(uchar *dst, uchar value, int count) {
-    memset(dst, value, count);
-}
+//void arrset(uchar *dst, uchar value, int count) {
+//    memset(dst, value, count);
+//}
 
 bool arrckall(const uchar *arr, uchar value, int count) {
     for (int i = 0; i < count; i++)
@@ -36,12 +36,12 @@ bool arrckall(const uchar *arr, uchar value, int count) {
     return true;
 }
 
-bool arrckany(const uchar *arr, uchar value, int count) {
-    for (int i = 0; i < count; i++)
-        if (arr[i] == value)
-            return true;
-    return false;
-}
+//bool arrckany(const uchar *arr, uchar value, int count) {
+//    for (int i = 0; i < count; i++)
+//        if (arr[i] == value)
+//            return true;
+//    return false;
+//}
 
 void arrresize(uchar* dst, const uchar* src, int dstWidth, int dstHeight, int srcWidth, int srcHeight)
 {
@@ -134,14 +134,14 @@ bool improcImageWithAlpha(const Mat &img, const uchar *alphaData, bool compact, 
     return true;
 }
 
-void improcMaskToImage(const uchar *maskData, const uchar *opacityData, cv::Size size, cv::Rect rect, Mat &img) {
-    Mat mask = Mat(size.height, size.width, CV_8UC1, (uchar *) maskData);
-    Mat opacity = Mat(mask.size(), CV_8UC1, (uchar *) opacityData);
-    Mat alpha = Mat(rect.size(), CV_8UC1);
-    Point p;
-    improcMaskToAlpha(maskData, opacityData, alpha.data, size, rect);
-    improcAlphaToImage(alpha.data, alpha.size(), cv::Rect(0, 0, rect.width, rect.height), img);
-}
+//void improcMaskToImage(const uchar *maskData, const uchar *opacityData, cv::Size size, cv::Rect rect, Mat &img) {
+//    Mat mask = Mat(size.height, size.width, CV_8UC1, (uchar *) maskData);
+//    Mat opacity = Mat(mask.size(), CV_8UC1, (uchar *) opacityData);
+//    Mat alpha = Mat(rect.size(), CV_8UC1);
+//    Point p;
+//    improcMaskToAlpha(maskData, opacityData, alpha.data, size, rect);
+//    improcAlphaToImage(alpha.data, alpha.size(), cv::Rect(0, 0, rect.width, rect.height), img);
+//}
 
 bool improcImageSelect(const uchar *imageData, cv::Size size, uchar *maskData, const uchar *regionData, const uchar *opacityData, int mode, bool edgeDetection, cv::Rect rect, cv::Rect &outRect) {
 
@@ -267,96 +267,96 @@ void improcAlphaToMask(const uchar *alphaData, uchar *maskData, cv::Size size, c
     }
 }
 
-void improcPushMaskLog(const uchar *mask, unsigned short *log, int count, int offset) {
-    if (offset == 0) {
-        for (int i = 0; i < count; i++)
-            log[i] = (log[i] << 4) | mask[i];
-            }
-    else {
-        for (int i = 0; i < count; i++)
-            log[i] = (((log[i] >> (offset * 4 - 4)) & 0xFFF0) | mask[i]);
-            }
-}
+//void improcPushMaskLog(const uchar *mask, unsigned short *log, int count, int offset) {
+//    if (offset == 0) {
+//        for (int i = 0; i < count; i++)
+//            log[i] = (log[i] << 4) | mask[i];
+//            }
+//    else {
+//        for (int i = 0; i < count; i++)
+//            log[i] = (((log[i] >> (offset * 4 - 4)) & 0xFFF0) | mask[i]);
+//            }
+//}
 
-void improcPopMaskLog(uchar *mask, const unsigned short *log, int count, int offset) {
-    for (int i = 0; i < count; i++) {
-        mask[i] = (log[i] >> offset * 4) & GC_LOG_MASK;
-    }
-}
+//void improcPopMaskLog(uchar *mask, const unsigned short *log, int count, int offset) {
+//    for (int i = 0; i < count; i++) {
+//        mask[i] = (log[i] >> offset * 4) & GC_LOG_MASK;
+//    }
+//}
 
-void improcMaskToAlpha(const uchar *mask, const uchar *opacity, uchar *alpha, cv::Size size, cv::Rect rect) {
-    cv::Mat maskMat(size, CV_8UC1, (uchar *)mask);
-    cv::Mat opacityMat(size, CV_8UC1, (uchar *)opacity);
-    cv::Mat alphaMat(rect.size(), CV_8UC1, alpha);
-    cv::Point p;
+//void improcMaskToAlpha(const uchar *mask, const uchar *opacity, uchar *alpha, cv::Size size, cv::Rect rect) {
+//    cv::Mat maskMat(size, CV_8UC1, (uchar *)mask);
+//    cv::Mat opacityMat(size, CV_8UC1, (uchar *)opacity);
+//    cv::Mat alphaMat(rect.size(), CV_8UC1, alpha);
+//    cv::Point p;
+//
+//    int r = SMOOTH_RADIUS;
+//    int top = MAX(0, rect.y - r);
+//    int left = MAX(0, rect.x - r);
+//    int bottom = MIN(size.height, rect.y + rect.height + r);
+//    int right = MIN(size.width, rect.x + rect.width + r);
+//
+//    cv::Rect outerRect(left, top, right - left, bottom - top);
+//    cv::Mat smoothed(outerRect.size(), CV_8UC1);
+//
+//    for (p.y = 0; p.y < smoothed.rows; p.y++) {
+//        for (p.x = 0; p.x < smoothed.cols; p.x++) {
+//            cv::Point q(p.x + outerRect.x, p.y + outerRect.y);
+//            if (GC_IS_FGD(maskMat.at<uchar>(q))) {
+//                smoothed.at<uchar>(p) = 255;
+//            }
+//            else {
+//                smoothed.at<uchar>(p) = 0;
+//            }
+//        }
+//    }
+//
+//    for (p.y = 0; p.y < alphaMat.rows; p.y++) {
+//        for (p.x = 0; p.x < alphaMat.cols; p.x++) {
+//            cv::Point q(p.x + rect.x - outerRect.x, p.y + rect.y - outerRect.y);
+//            cv::Point r(p.x + rect.x, p.y + rect.y);
+//            cv::Point left(MAX(0, r.x - SMOOTH_RADIUS), r.y);
+//            cv::Point top(r.x, MAX(0, r.y - SMOOTH_RADIUS));
+//            cv::Point right(MIN(size.width - 1, r.x + SMOOTH_RADIUS), r.y);
+//            cv::Point bottom(r.x, MIN(size.height - 1, r.y + SMOOTH_RADIUS));
+//
+//            if (!bit(maskMat.at<uchar>(r), GC_FLAG_ALPHA) ||
+//                !bit(maskMat.at<uchar>(top), GC_FLAG_ALPHA) ||
+//                !bit(maskMat.at<uchar>(left), GC_FLAG_ALPHA) ||
+//                !bit(maskMat.at<uchar>(bottom), GC_FLAG_ALPHA) ||
+//                !bit(maskMat.at<uchar>(right), GC_FLAG_ALPHA))
+//            {
+//                alphaMat.at<uchar>(p) = smoothed.at<uchar>(q);
+//            }
+//            else
+//            {
+//                alphaMat.at<uchar>(p) = opacityMat.at<uchar>(r);
+//            }
+//        }
+//    }
+//}
 
-    int r = SMOOTH_RADIUS;
-    int top = MAX(0, rect.y - r);
-    int left = MAX(0, rect.x - r);
-    int bottom = MIN(size.height, rect.y + rect.height + r);
-    int right = MIN(size.width, rect.x + rect.width + r);
-
-    cv::Rect outerRect(left, top, right - left, bottom - top);
-    cv::Mat smoothed(outerRect.size(), CV_8UC1);
-
-    for (p.y = 0; p.y < smoothed.rows; p.y++) {
-        for (p.x = 0; p.x < smoothed.cols; p.x++) {
-            cv::Point q(p.x + outerRect.x, p.y + outerRect.y);
-            if (GC_IS_FGD(maskMat.at<uchar>(q))) {
-                smoothed.at<uchar>(p) = 255;
-            }
-            else {
-                smoothed.at<uchar>(p) = 0;
-            }
-        }
-    }
-
-    for (p.y = 0; p.y < alphaMat.rows; p.y++) {
-        for (p.x = 0; p.x < alphaMat.cols; p.x++) {
-            cv::Point q(p.x + rect.x - outerRect.x, p.y + rect.y - outerRect.y);
-            cv::Point r(p.x + rect.x, p.y + rect.y);
-            cv::Point left(MAX(0, r.x - SMOOTH_RADIUS), r.y);
-            cv::Point top(r.x, MAX(0, r.y - SMOOTH_RADIUS));
-            cv::Point right(MIN(size.width - 1, r.x + SMOOTH_RADIUS), r.y);
-            cv::Point bottom(r.x, MIN(size.height - 1, r.y + SMOOTH_RADIUS));
-
-            if (!bit(maskMat.at<uchar>(r), GC_FLAG_ALPHA) ||
-                !bit(maskMat.at<uchar>(top), GC_FLAG_ALPHA) ||
-                !bit(maskMat.at<uchar>(left), GC_FLAG_ALPHA) ||
-                !bit(maskMat.at<uchar>(bottom), GC_FLAG_ALPHA) ||
-                !bit(maskMat.at<uchar>(right), GC_FLAG_ALPHA))
-            {
-                alphaMat.at<uchar>(p) = smoothed.at<uchar>(q);
-            }
-            else
-            {
-                alphaMat.at<uchar>(p) = opacityMat.at<uchar>(r);
-            }
-        }
-    }
-}
-
-void improcUpdateMask(uchar *mask, const uchar *alpha, const uchar *region, int count) {
-    for (int i=0; i < count; i++) {
-        if (region[i] != GM_UNKNOWN)
-            continue;
-        
-        if ((GC_IS_FGD(mask[i]) && alpha[i] != 255) ||
-            (GC_IS_BGD(mask[i]) && alpha[i] != 0)) {
-            bis(mask[i], GC_FLAG_ALPHA);
-        }
-    }
-}
+//void improcUpdateMask(uchar *mask, const uchar *alpha, const uchar *region, int count) {
+//    for (int i=0; i < count; i++) {
+//        if (region[i] != GM_UNKNOWN)
+//            continue;
+//
+//        if ((GC_IS_FGD(mask[i]) && alpha[i] != 255) ||
+//            (GC_IS_BGD(mask[i]) && alpha[i] != 0)) {
+//            bis(mask[i], GC_FLAG_ALPHA);
+//        }
+//    }
+//}
 
 void improcInvertAlpha(uchar *alpha, int count) {
     for (int i = 0; i < count; i++)
         alpha[i] = 255 - alpha[i];
 }
 
-void improcInvertMask(uchar *mask, int count) {
-    for (int i = 0; i < count; i++)
-        mask[i] ^= GC_MASK;
-}
+//void improcInvertMask(uchar *mask, int count) {
+//    for (int i = 0; i < count; i++)
+//        mask[i] ^= GC_MASK;
+//}
 
 bool improcLogEncodeArray(const uchar *arr, int count, unsigned int *buf, int bufLen, int *processed, int *offset) {
     std::vector<unsigned char> zero(count, 0);
@@ -406,11 +406,11 @@ bool improcLogEncodeDiff(const uchar *from, const uchar *to, int count, unsigned
     return true;
 }
 
-void improcLogDecodeArray(uchar *decoded, const uint *encoded, int decodedCount, int incodedCount) {
-    //Mat zero(1, decodedCount, CV_8UC1);
-    std::vector<unsigned char> zero(decodedCount, 0);
-    improcLogDecodeDiff(decoded, zero.data(), encoded, decodedCount, incodedCount);
-}
+//void improcLogDecodeArray(uchar *decoded, const uint *encoded, int decodedCount, int incodedCount) {
+//    //Mat zero(1, decodedCount, CV_8UC1);
+//    std::vector<unsigned char> zero(decodedCount, 0);
+//    improcLogDecodeDiff(decoded, zero.data(), encoded, decodedCount, incodedCount);
+//}
 
 void improcLogDecodeDiff(uchar *to, const uchar *from, const uint *diff, int count, int diffCount) {
 

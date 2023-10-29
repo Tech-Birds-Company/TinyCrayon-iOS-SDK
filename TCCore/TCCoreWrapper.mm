@@ -24,17 +24,17 @@ typedef unsigned int uint;
     arrcpy(dst, src, (int)count);
 }
 
-+(void) arrayCopy:(ushort *)dst src:(const uchar *)src length:(NSInteger)length {
-    arrcpy(dst, src, (int)length);
-}
+//+(void) arrayCopy:(ushort *)dst src:(const uchar *)src length:(NSInteger)length {
+//    arrcpy(dst, src, (int)length);
+//}
 
 +(Boolean) arrayCheckAll:(const uchar *)arr value:(uchar)value count:(NSInteger)count {
     return arrckall(arr, value, (int)count);
 }
 
-+(Boolean) arrayCheckAny:(const uchar *)arr value:(uchar)value count:(NSInteger)count {
-    return arrckany(arr, value, (int)count);
-}
+//+(Boolean) arrayCheckAny:(const uchar *)arr value:(uchar)value count:(NSInteger)count {
+//    return arrckany(arr, value, (int)count);
+//}
 
 +(void) arrayResize:(uchar *)dst src:(const uchar *)src dstSize:(CGSize)dstSize srcSize:(CGSize)srcSize {
     arrresize(dst, src, dstSize.width, dstSize.height, srcSize.width, srcSize.height);
@@ -155,14 +155,14 @@ typedef unsigned int uint;
     return [self UIImageFromCVMat:result alphaInfo:kCGImageAlphaLast];
 }
 
-+(UIImage *) imageFromMask:(const uchar *)mask alpha:(const uchar *)alpha size:(CGSize)size rect:(CGRect)rect {
-    cv::Rect cvRect = cv::Rect(rect.origin.x, rect.origin.y, rect.size.width, rect.size.height);
-    cv::Mat img;
-
-    improcMaskToImage(mask, alpha, cv::Size(size.width, size.height), cvRect, img);
-
-    return [self UIImageFromCVMat:img];
-}
+//+(UIImage *) imageFromMask:(const uchar *)mask alpha:(const uchar *)alpha size:(CGSize)size rect:(CGRect)rect {
+//    cv::Rect cvRect = cv::Rect(rect.origin.x, rect.origin.y, rect.size.width, rect.size.height);
+//    cv::Mat img;
+//
+//    improcMaskToImage(mask, alpha, cv::Size(size.width, size.height), cvRect, img);
+//
+//    return [self UIImageFromCVMat:img];
+//}
 
 +(Boolean) imageSelect:(const uchar *)imageData size:(CGSize)size mask:(uchar*)mask region:(const uchar *)region opacity:(uchar *)opacity mode:(NSInteger)mode edgeDetection:(Boolean)edgeDetection rect:(CGRect)rect outRect:(CGRect *)outRect {
 
@@ -202,17 +202,17 @@ typedef unsigned int uint;
     improcAlphaToMask(alpha, mask, cvSize, cvRect);
 }
 
-+(void) pushMaskLog:(const uchar *)mask log:(unsigned short *)log count:(NSInteger)count offset:(NSInteger)offset{
-    improcPushMaskLog(mask, log, (int)count, (int)offset);
-}
+//+(void) pushMaskLog:(const uchar *)mask log:(unsigned short *)log count:(NSInteger)count offset:(NSInteger)offset{
+//    improcPushMaskLog(mask, log, (int)count, (int)offset);
+//}
+//
+//+(void) popMaskLog:(uchar *)mask log:(const unsigned short *)log count:(NSInteger)count offset:(NSInteger)offset {
+//    improcPopMaskLog(mask, log, (int)count, (int)offset);
+//}
 
-+(void) popMaskLog:(uchar *)mask log:(const unsigned short *)log count:(NSInteger)count offset:(NSInteger)offset {
-    improcPopMaskLog(mask, log, (int)count, (int)offset);
-}
-
-+(void) updateMask:(uchar *)mask alpha:(const uchar *)alpha region:(const uchar *)region count:(NSInteger)count {
-    improcUpdateMask(mask, alpha, region, (int)count);
-}
+//+(void) updateMask:(uchar *)mask alpha:(const uchar *)alpha region:(const uchar *)region count:(NSInteger)count {
+//    improcUpdateMask(mask, alpha, region, (int)count);
+//}
 
 +(Boolean) drawRadialGradientOnAlpha:(uchar *)alpha size:(CGSize)size center:(CGPoint)center startValue:(uchar)startValue startRadius:(CGFloat)startRadius endValue:(uchar)endValue endRadius:(CGFloat)endRadius outRect:(CGRect *)outRect add:(Boolean)add {
     cv::Size cvSize(size.width, size.height);
@@ -230,9 +230,9 @@ typedef unsigned int uint;
     improcInvertAlpha(alpha, (int)count);
 }
 
-+(void) invertMask:(uchar *)mask count:(NSInteger)count {
-    improcInvertMask(mask, (int)count);
-}
+//+(void) invertMask:(uchar *)mask count:(NSInteger)count {
+//    improcInvertMask(mask, (int)count);
+//}
 
 +(Boolean) logEncodeArray:(const uchar *)array count:(NSInteger)count buf:(uint *)buf bufLen:(int)bufLen processed:(int *)processed offset:(int *)offset {
     return improcLogEncodeArray(array, (int)count, buf, bufLen, processed, offset);
@@ -242,9 +242,9 @@ typedef unsigned int uint;
     return improcLogEncodeDiff(from, to, (int)count, buf, bufLen, processed, offset);
 }
 
-+(void) logDecodeArray:(uchar *)decoded encoded:(const uint *)encoded decodedCount:(NSInteger)decodedCount encodedCount:(NSInteger)encodedCount {
-    improcLogDecodeArray(decoded, encoded, (int)decodedCount, (int)encodedCount);
-}
+//+(void) logDecodeArray:(uchar *)decoded encoded:(const uint *)encoded decodedCount:(NSInteger)decodedCount encodedCount:(NSInteger)encodedCount {
+//    improcLogDecodeArray(decoded, encoded, (int)decodedCount, (int)encodedCount);
+//}
 
 +(void) logDecodeDiffTo:(uchar *)to from:(const uchar*)from diff:(const uint *)diff count:(NSInteger)count diffCount:(NSInteger)diffCount {
     improcLogDecodeDiff(to, from, diff, (int)count, (int)diffCount);
