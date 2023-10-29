@@ -13,6 +13,7 @@
 
 #include "TCCoreLibs0.h"
 #include "improc.hpp"
+#import <cstring>
 
 typedef uint8_t uchar;
 typedef uint16_t ushort;
@@ -21,7 +22,8 @@ typedef unsigned int uint;
 @implementation TCCore
 
 +(void) arrayCopy:(uchar *)dst src:(const uchar *)src count:(NSInteger)count {
-    arrcpy(dst, src, (int)count);
+    //arrcpy(dst, src, (int)count);
+    std::memcpy(dst, src, (int)count);
 }
 
 //+(void) arrayCopy:(ushort *)dst src:(const uchar *)src length:(NSInteger)length {
@@ -29,7 +31,10 @@ typedef unsigned int uint;
 //}
 
 +(Boolean) arrayCheckAll:(const uchar *)arr value:(uchar)value count:(NSInteger)count {
-    return arrckall(arr, value, (int)count);
+    for (int i = 0; i < count; i++)
+        if (arr[i] != value)
+            return false;
+    return true;
 }
 
 //+(Boolean) arrayCheckAny:(const uchar *)arr value:(uchar)value count:(NSInteger)count {
@@ -37,7 +42,38 @@ typedef unsigned int uint;
 //}
 
 +(void) arrayResize:(uchar *)dst src:(const uchar *)src dstSize:(CGSize)dstSize srcSize:(CGSize)srcSize {
-    arrresize(dst, src, dstSize.width, dstSize.height, srcSize.width, srcSize.height);
+    int dstWidth = dstSize.width;
+    int dstHeight = dstSize.height;
+    int srcWidth = srcSize.width;
+    int srcHeight = srcSize.height;
+    for (int y = 0; y < dstHeight; ++y)
+    {
+        for (int x = 0; x < dstWidth; ++x)
+        {
+            float srcX = x * (srcWidth - 1) / static_cast<float>(dstWidth - 1);
+            float srcY = y * (srcHeight - 1) / static_cast<float>(dstHeight - 1);
+
+            int srcX0 = std::floor(srcX);
+            int srcY0 = std::floor(srcY);
+            int srcX1 = std::ceil(srcX);
+            int srcY1 = std::ceil(srcY);
+
+            float xWeight = srcX - srcX0;
+            float yWeight = srcY - srcY0;
+
+            uchar pixel00 = src[srcY0 * srcWidth + srcX0];
+            uchar pixel01 = src[srcY0 * srcWidth + srcX1];
+            uchar pixel10 = src[srcY1 * srcWidth + srcX0];
+            uchar pixel11 = src[srcY1 * srcWidth + srcX1];
+
+            uchar interpolatedPixel = static_cast<uchar>((1 - xWeight) * (1 - yWeight) * pixel00 +
+                                                         xWeight * (1 - yWeight) * pixel01 +
+                                                         (1 - xWeight) * yWeight * pixel10 +
+                                                         xWeight * yWeight * pixel11);
+
+            dst[y * dstWidth + x] = interpolatedPixel;
+        }
+    }
 }
 
 //// convert from UIImage to cv::Mat or vise versa
@@ -67,37 +103,37 @@ typedef unsigned int uint;
     return cvMat;
 }
 
-+(cv::Mat)cvMatFromUIImage:(UIImage *)image rect:(CGRect)rect {
-    CGImageRef cgimage = CGImageCreateWithImageInRect(image.CGImage, rect);
-    UIImage *img = [UIImage imageWithCGImage:cgimage];
-    cv::Mat mat = [self cvMatFromUIImage:img];
-    CGImageRelease(cgimage);
-    return mat;
-}
+//+(cv::Mat)cvMatFromUIImage:(UIImage *)image rect:(CGRect)rect {
+//    CGImageRef cgimage = CGImageCreateWithImageInRect(image.CGImage, rect);
+//    UIImage *img = [UIImage imageWithCGImage:cgimage];
+//    cv::Mat mat = [self cvMatFromUIImage:img];
+//    CGImageRelease(cgimage);
+//    return mat;
+//}
 
 // convert UIImage to gray cv::Mat
-+(cv::Mat)cvMatGrayFromUIImage:(UIImage *)image
-{
-    CGColorSpaceRef colorSpace = CGImageGetColorSpace(image.CGImage);
-    CGFloat cols = image.size.width;
-    CGFloat rows = image.size.height;
-
-    cv::Mat cvMat(rows, cols, CV_8UC1); // 8 bits per component, 1 channels
-
-    CGContextRef contextRef = CGBitmapContextCreate(cvMat.data,                 // Pointer to data
-                                                    cols,                       // Width of bitmap
-                                                    rows,                       // Height of bitmap
-                                                    8,                          // Bits per component
-                                                    cvMat.step[0],              // Bytes per row
-                                                    colorSpace,                 // Colorspace
-                                                    kCGImageAlphaNoneSkipLast |
-                                                    kCGBitmapByteOrderDefault); // Bitmap info flags
-
-    CGContextDrawImage(contextRef, CGRectMake(0, 0, cols, rows), image.CGImage);
-    CGContextRelease(contextRef);
-
-    return cvMat;
-}
+//+(cv::Mat)cvMatGrayFromUIImage:(UIImage *)image
+//{
+//    CGColorSpaceRef colorSpace = CGImageGetColorSpace(image.CGImage);
+//    CGFloat cols = image.size.width;
+//    CGFloat rows = image.size.height;
+//
+//    cv::Mat cvMat(rows, cols, CV_8UC1); // 8 bits per component, 1 channels
+//
+//    CGContextRef contextRef = CGBitmapContextCreate(cvMat.data,                 // Pointer to data
+//                                                    cols,                       // Width of bitmap
+//                                                    rows,                       // Height of bitmap
+//                                                    8,                          // Bits per component
+//                                                    cvMat.step[0],              // Bytes per row
+//                                                    colorSpace,                 // Colorspace
+//                                                    kCGImageAlphaNoneSkipLast |
+//                                                    kCGBitmapByteOrderDefault); // Bitmap info flags
+//
+//    CGContextDrawImage(contextRef, CGRectMake(0, 0, cols, rows), image.CGImage);
+//    CGContextRelease(contextRef);
+//
+//    return cvMat;
+//}
 
 +(UIImage *)UIImageFromCVMat:(cv::Mat)cvMat
 {

@@ -16,25 +16,25 @@
 #define SMOOTH_RADIUS    3
 #define SMOOTH_SOFTNESS 27
 
-void arrcpy(uchar *dst, const uchar *src, int count) {
-    memcpy(dst, src, count);
-}
+//void arrcpy(uchar *dst, const uchar *src, int count) {
+//    memcpy(dst, src, count);
+//}
 
-void arrcpy(ushort *dst, const uchar *src, int count) {
-    for (int i = 0; i < count; i++)
-        dst[i] = src[i];
-}
+//void arrcpy(ushort *dst, const uchar *src, int count) {
+//    for (int i = 0; i < count; i++)
+//        dst[i] = src[i];
+//}
 
 //void arrset(uchar *dst, uchar value, int count) {
 //    memset(dst, value, count);
 //}
 
-bool arrckall(const uchar *arr, uchar value, int count) {
-    for (int i = 0; i < count; i++)
-        if (arr[i] != value)
-            return false;
-    return true;
-}
+//bool arrckall(const uchar *arr, uchar value, int count) {
+//    for (int i = 0; i < count; i++)
+//        if (arr[i] != value)
+//            return false;
+//    return true;
+//}
 
 //bool arrckany(const uchar *arr, uchar value, int count) {
 //    for (int i = 0; i < count; i++)
@@ -43,37 +43,37 @@ bool arrckall(const uchar *arr, uchar value, int count) {
 //    return false;
 //}
 
-void arrresize(uchar* dst, const uchar* src, int dstWidth, int dstHeight, int srcWidth, int srcHeight)
-{
-    for (int y = 0; y < dstHeight; ++y)
-    {
-        for (int x = 0; x < dstWidth; ++x)
-        {
-            float srcX = x * (srcWidth - 1) / static_cast<float>(dstWidth - 1);
-            float srcY = y * (srcHeight - 1) / static_cast<float>(dstHeight - 1);
-
-            int srcX0 = std::floor(srcX);
-            int srcY0 = std::floor(srcY);
-            int srcX1 = std::ceil(srcX);
-            int srcY1 = std::ceil(srcY);
-
-            float xWeight = srcX - srcX0;
-            float yWeight = srcY - srcY0;
-
-            uchar pixel00 = src[srcY0 * srcWidth + srcX0];
-            uchar pixel01 = src[srcY0 * srcWidth + srcX1];
-            uchar pixel10 = src[srcY1 * srcWidth + srcX0];
-            uchar pixel11 = src[srcY1 * srcWidth + srcX1];
-
-            uchar interpolatedPixel = static_cast<uchar>((1 - xWeight) * (1 - yWeight) * pixel00 +
-                                                         xWeight * (1 - yWeight) * pixel01 +
-                                                         (1 - xWeight) * yWeight * pixel10 +
-                                                         xWeight * yWeight * pixel11);
-
-            dst[y * dstWidth + x] = interpolatedPixel;
-        }
-    }
-}
+//void arrresize(uchar* dst, const uchar* src, int dstWidth, int dstHeight, int srcWidth, int srcHeight)
+//{
+//    for (int y = 0; y < dstHeight; ++y)
+//    {
+//        for (int x = 0; x < dstWidth; ++x)
+//        {
+//            float srcX = x * (srcWidth - 1) / static_cast<float>(dstWidth - 1);
+//            float srcY = y * (srcHeight - 1) / static_cast<float>(dstHeight - 1);
+//
+//            int srcX0 = std::floor(srcX);
+//            int srcY0 = std::floor(srcY);
+//            int srcX1 = std::ceil(srcX);
+//            int srcY1 = std::ceil(srcY);
+//
+//            float xWeight = srcX - srcX0;
+//            float yWeight = srcY - srcY0;
+//
+//            uchar pixel00 = src[srcY0 * srcWidth + srcX0];
+//            uchar pixel01 = src[srcY0 * srcWidth + srcX1];
+//            uchar pixel10 = src[srcY1 * srcWidth + srcX0];
+//            uchar pixel11 = src[srcY1 * srcWidth + srcX1];
+//
+//            uchar interpolatedPixel = static_cast<uchar>((1 - xWeight) * (1 - yWeight) * pixel00 +
+//                                                         xWeight * (1 - yWeight) * pixel01 +
+//                                                         (1 - xWeight) * yWeight * pixel10 +
+//                                                         xWeight * yWeight * pixel11);
+//
+//            dst[y * dstWidth + x] = interpolatedPixel;
+//        }
+//    }
+//}
 
 bool improcImageWithAlpha(const Mat &img, const uchar *alphaData, bool compact, Point &offset, Mat &result, bool argb) {
     Point p;

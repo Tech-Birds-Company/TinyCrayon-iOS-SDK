@@ -20,16 +20,16 @@ typedef uint8_t uchar;
 typedef uint16_t ushort;
 typedef unsigned int uint;
 
-void arrcpy(uchar *dst, const uchar *src, int count);
+//void arrcpy(uchar *dst, const uchar *src, int count);
 //void arrcpy(ushort *dst, const uchar *src, int count);
 
 //void arrset(uchar *dst, uchar value, int count);
 
-bool arrckall(const uchar *arr, uchar value, int count);
+//bool arrckall(const uchar *arr, uchar value, int count);
 
 //bool arrckany(const uchar *arr, uchar value, int count);
 
-void arrresize(uchar* dst, const uchar* src, int dstWidth, int dstHeight, int srcWidth, int srcHeight);
+//void arrresize(uchar* dst, const uchar* src, int dstWidth, int dstHeight, int srcWidth, int srcHeight);
 
 //
 //   NAME: improcPushMaskLog
